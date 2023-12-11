@@ -11,7 +11,10 @@ const config: Config = {
       colors: {
         primary: "#2FF736",
         secondary: "#2FEDF7",
-        background: "#EFF6FA",
+        background: "#00001E",
+      },
+      animation: {
+        "spin-slow": "spin 120s linear infinite",
       },
     },
   },
