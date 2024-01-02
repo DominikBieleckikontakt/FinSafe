@@ -12,7 +12,8 @@ const config: Config = {
         primary: "#2FF736",
         "primary-darker": "#2ff736cc",
         secondary: "#2FEDF7",
-        background: "#00001E",
+        background: "#0d0d0d",
+        "background-lighter": "#1a1a1a",
       },
       animation: {
         "spin-slow": "spin 120s linear infinite",

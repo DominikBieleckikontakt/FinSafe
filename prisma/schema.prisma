@@ -9,19 +9,27 @@ datasource db {
 }
 
 model User {
-    id              String      @id @default(uuid())
+    id              String      @id @default(uuid()) @unique
     name            String
     lastname        String
     email           String      @unique
     password        String
-    userBudget      UserBudget @relation(fields: [userBudgetId], references: [id])
-    userBudgetId    String     @unique
+    userBudget      UserBudget?
 }
 
 model UserBudget {
-    id              String      @id @default(uuid())
+    id              String      @id @default(uuid()) @unique
+    budget          Float
+    dailyBudgets    DailyBudget[]
+    user            User        @relation(fields: [userId], references: [id])
+    userId          String      @unique
+}
+
+model DailyBudget {
+    id              String      @id @default(uuid()) @unique
     createdAt       DateTime    @default(now())
     income          Float
     outcome         Float
-    user            User?
+    userBudget      UserBudget  @relation(fields: [userBudgetId], references: [id])   
+    userBudgetId    String
 }

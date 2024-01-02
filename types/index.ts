@@ -5,3 +5,11 @@ export type ButtonProps = {
   text: string;
   onClick: (e: React.MouseEvent) => void;
 };
+
+export type SignUpForm = {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  rpassword: string;
+};
