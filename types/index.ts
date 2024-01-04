@@ -13,3 +13,8 @@ export type SignUpForm = {
   password: string;
   rpassword: string;
 };
+
+export type LogInFormType = {
+  email: string;
+  password: string;
+};
