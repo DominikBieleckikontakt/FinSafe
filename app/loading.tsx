@@ -1,11 +1,9 @@
 import React from "react";
 
+import { LoadingElement } from "@/components";
+
 const Loading = () => {
-  return (
-    <div className="text-white w-full h-[50rem] flex justify-center items-center">
-      <div className="rounded-full border-primary border-t-transparent border-4 border-solid animate-spin h-10 w-10"></div>
-    </div>
-  );
+  return <LoadingElement />;
 };
 
 export default Loading;

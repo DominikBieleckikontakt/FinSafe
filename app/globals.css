@@ -8,3 +8,13 @@ body {
   font-family: "Open Sans", sans-serif;
   /* color: #4e4e4eb6 */
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #4e4e4e inset !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: white !important;
+}
