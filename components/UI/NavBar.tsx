@@ -26,7 +26,7 @@ const NavBar = async () => {
           </Link>
         )}
       </div>
-      {session && session?.user && <LogOutButton />}
+      {session?.user && <LogOutButton />}
     </div>
   );
 };
