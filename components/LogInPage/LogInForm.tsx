@@ -109,7 +109,7 @@ const LogInForm = () => {
                 htmlFor="keep"
                 className="font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white"
               >
-                Keep logged in
+                Remember me
               </label>
             </div>
             {!isValid && (

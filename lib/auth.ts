@@ -58,14 +58,6 @@ export const authOptions: NextAuthOptions = {
           );
         }
 
-        if (credentials?.rememberMe) {
-          cookies().set("remember-me", credentials?.rememberMe, {
-            path: "/login",
-            maxAge: 60 * 60 * 24 * 30,
-            secure: false,
-          });
-        }
-
         return {
           id: `${existingUser.id}`,
           name: existingUser.name,
