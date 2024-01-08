@@ -1,5 +1,4 @@
 import React from "react";
-import NextAuth from "next-auth";
 
 export type ButtonProps = {
   className: string;
@@ -35,3 +34,7 @@ declare module "next-auth" {
     };
   }
 }
+
+export type LogOutComponentProps = {
+  children: React.ReactNode;
+};

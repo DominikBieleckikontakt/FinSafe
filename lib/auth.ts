@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "./prisma";
 import { compare } from "bcrypt";
 import { encode, decode } from "next-auth/jwt";
+import { cookies } from "next/headers";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -26,8 +27,12 @@ export const authOptions: NextAuthOptions = {
           placeholder: "john@example.com",
         },
         password: { label: "Password", type: "password" },
+        rememberMe: {
+          label: "Remember me",
+          type: "checkbox",
+        },
       },
-      async authorize(credentials) {
+      async authorize(credentials, res) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -52,6 +57,13 @@ export const authOptions: NextAuthOptions = {
             JSON.stringify({ errors: "Wrong password", status: 402 })
           );
         }
+        if (credentials?.rememberMe) {
+          cookies().set("remember-me", credentials?.rememberMe, {
+            path: "/login",
+            maxAge: 60 * 60 * 24 * 30,
+            secure: false,
+          });
+        }
 
         return {
           id: `${existingUser.id}`,
@@ -61,6 +73,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {

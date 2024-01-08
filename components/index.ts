@@ -5,7 +5,9 @@ import SignForm from "./SignUpPage/SignForm";
 import LogInForm from "./LogInPage/LogInForm";
 import NavBar from "./UI/NavBar";
 import LogOutButton from "./UI/LogOutButton";
-import Loading from "./UI/Loading";
+import LoadingElement from "./UI/Loading";
+import LogOutComponent from "./UI/LogOutComponent";
+import { Checkbox } from "./UI/checkbox";
 
 export {
   MainPage,
@@ -15,5 +17,7 @@ export {
   LogInForm,
   NavBar,
   LogOutButton,
-  Loading as LoadingElement,
+  LoadingElement,
+  LogOutComponent,
+  Checkbox,
 };

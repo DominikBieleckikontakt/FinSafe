@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
+import { Checkbox } from "..";
 import { LogInFormType } from "@/types";
 import { LoadingElement } from "..";
 
@@ -16,6 +17,7 @@ const LogInForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+  const [keep, setKeep] = useState<boolean>(false);
 
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const LogInForm = () => {
     const logInData = await signIn("credentials", {
       email: form.email,
       password: form.password,
+      rememberMe: keep,
       redirect: false,
     });
 
@@ -71,7 +74,7 @@ const LogInForm = () => {
                 }
               />
             </div>
-            <div className="p-5 flex flex-col  pb-3">
+            <div className="p-5 flex flex-col pb-3">
               <label
                 htmlFor="password"
                 className="text-white font-light text-lg"
@@ -93,6 +96,21 @@ const LogInForm = () => {
                   }))
                 }
               />
+            </div>
+            <div className="flex items-center space-x-2 p-5 pb-3">
+              <Checkbox
+                onCheckedChange={() => {
+                  setKeep((prev) => !prev);
+                  console.log(keep);
+                }}
+                id="keep"
+              />
+              <label
+                htmlFor="keep"
+                className="font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white"
+              >
+                Keep logged in
+              </label>
             </div>
             {!isValid && (
               <div className="text-red-600 font-bold pl-5">{message}</div>
