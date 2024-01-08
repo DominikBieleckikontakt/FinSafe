@@ -57,13 +57,14 @@ export const authOptions: NextAuthOptions = {
             JSON.stringify({ errors: "Wrong password", status: 402 })
           );
         }
-        if (credentials?.rememberMe) {
-          cookies().set("remember-me", credentials?.rememberMe, {
-            path: "/login",
-            maxAge: 60 * 60 * 24 * 30,
-            secure: false,
-          });
-        }
+
+        // if (credentials?.rememberMe) {
+        //   cookies().set("remember-me", credentials?.rememberMe, {
+        //     path: "/login",
+        //     maxAge: 60 * 60 * 24 * 30,
+        //     secure: false,
+        //   });
+        // }
 
         return {
           id: `${existingUser.id}`,
