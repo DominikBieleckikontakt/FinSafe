@@ -5,7 +5,7 @@ import React from "react";
 const SignUp = () => {
   return (
     <div className="overflow-x-hidden overflow-y-hidden">
-      <div className="flex justify-center items-center h-[calc(100vh-10rem)]">
+      <div className="flex justify-center items-center mt-10">
         <SignForm />
       </div>
     </div>
