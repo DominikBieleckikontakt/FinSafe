@@ -17,6 +17,8 @@ const LogOutButton = () => {
           callbackUrl: `${window.location.origin}/login`,
         })
       }
+      width={36}
+      height={36}
     />
   );
 };

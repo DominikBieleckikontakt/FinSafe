@@ -4,7 +4,6 @@ import React from "react";
 
 const Home = async () => {
   const session = await getServerSession(authOptions);
-
   if (session?.user) {
     return <h2 className="text-white">Welcome again</h2>;
   }

@@ -4,7 +4,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "./prisma";
 import { compare } from "bcrypt";
 import { encode, decode } from "next-auth/jwt";
-import { cookies } from "next/headers";
+import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -18,6 +19,11 @@ export const authOptions: NextAuthOptions = {
     signOut: "/",
   },
   providers: [
+    GoogleProvider({
+      clientId:
+        "321967669711-1j9eaaup22g6ufmrons17730fqg6ae32.apps.googleusercontent.com",
+      clientSecret: "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",
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -32,7 +38,7 @@ export const authOptions: NextAuthOptions = {
           type: "checkbox",
         },
       },
-      async authorize(credentials, res) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -47,15 +53,27 @@ export const authOptions: NextAuthOptions = {
           );
         }
 
-        const passwordMatch = await compare(
-          credentials?.password,
-          existingUser.password
-        );
-
-        if (!passwordMatch) {
-          throw new Error(
-            JSON.stringify({ errors: "Wrong password", status: 402 })
+        if (existingUser.password) {
+          const passwordMatch = await bcrypt.compare(
+            credentials.password,
+            existingUser.password
           );
+          if (!passwordMatch) return null;
+        } else {
+          return null;
+        }
+
+        if (existingUser.password) {
+          const passwordMatch = await compare(
+            credentials?.password,
+            existingUser.password
+          );
+
+          if (!passwordMatch) {
+            throw new Error(
+              JSON.stringify({ errors: "Wrong password", status: 402 })
+            );
+          }
         }
 
         return {

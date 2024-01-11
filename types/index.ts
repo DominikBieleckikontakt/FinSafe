@@ -1,11 +1,18 @@
 import React from "react";
 
+export type LogInGoogleButtonProps = {
+  disabled: boolean;
+};
+
 export type ButtonProps = {
   className: string;
   text: string;
   image: string;
   alt: string;
   onClick: (e: React.MouseEvent) => void;
+  width: number;
+  height: number;
+  disabled: boolean;
 };
 
 export type SignUpForm = {
@@ -23,7 +30,7 @@ export type LogInFormType = {
 
 declare module "next-auth" {
   interface User {
-    name: string;
+    name: string | null;
   }
   interface Session {
     user: User & {

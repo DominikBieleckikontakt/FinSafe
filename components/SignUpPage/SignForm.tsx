@@ -1,6 +1,7 @@
 "use client";
 import { validateSignUpForm } from "@/lib/utils";
 import { SignUpForm } from "@/types";
+import LogInGoogleButton from "../LogInPage/LogInGoogleButton";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,10 +16,12 @@ const SignForm = () => {
     rpassword: "",
   });
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
   const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     setIsValid(validateSignUpForm(form).isCorrect);
 
     if (validateSignUpForm(form).isCorrect) {
@@ -32,15 +35,18 @@ const SignForm = () => {
 
       if (res.ok) {
         router.push("/");
+        setIsLoading(false);
       } else {
         if (res.status === 409) {
           setIsValid(false);
           setMessage("Account with this email already exists!");
         }
+        setIsLoading(false);
         console.error("Registration failed!");
       }
     } else {
       setIsValid(false);
+      setIsLoading(false);
       setMessage(validateSignUpForm(form).message);
     }
   };
@@ -155,7 +161,10 @@ const SignForm = () => {
           <div className="text-red-600 font-bold pl-5">{message}</div>
         )}
         <div className="flex justify-center">
-          <button className="text-[#efefef] my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear">
+          <button
+            className="text-[#efefef] my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear"
+            disabled={isLoading}
+          >
             Sign up!
           </button>
         </div>
@@ -164,6 +173,9 @@ const SignForm = () => {
         <div className="h-[2px] rounded-xl w-full bg-slate-600 ml-5"></div>
         <p className="px-3 text-slate-300">OR</p>
         <div className="h-[2px] rounded-xl w-full bg-slate-600 mr-5"></div>
+      </div>
+      <div className="md:px-16 pb-6 pt-3 w-full justify-center flex">
+        <LogInGoogleButton disabled={isLoading} />
       </div>
     </div>
   );

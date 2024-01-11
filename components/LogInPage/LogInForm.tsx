@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { Checkbox } from "..";
 import { LogInFormType } from "@/types";
 import { LoadingElement } from "..";
+import LogInGoogleButton from "./LogInGoogleButton";
 
 const LogInForm = () => {
   const router = useRouter();
@@ -116,7 +117,10 @@ const LogInForm = () => {
               <div className="text-red-600 font-bold pl-5">{message}</div>
             )}
             <div className="flex justify-center">
-              <button className="text-[#efefef] my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear">
+              <button
+                className="text-[#efefef] my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear"
+                disabled={isLoading}
+              >
                 Log in!
               </button>
             </div>
@@ -125,6 +129,9 @@ const LogInForm = () => {
             <div className="h-[2px] rounded-xl w-full bg-slate-600 ml-5"></div>
             <p className="px-3 text-slate-300">OR</p>
             <div className="h-[2px] rounded-xl w-full bg-slate-600 mr-5"></div>
+          </div>
+          <div className="md:px-16 pb-6 pt-3 w-full justify-center flex">
+            <LogInGoogleButton disabled={isLoading} />
           </div>
         </div>
       )}

@@ -16,19 +16,25 @@ const Circles = () => {
         <Link href="/signup">
           <Button
             text="Sign up"
-            className="text-[#efefef] w-full my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear"
+            className="text-[#efefef] w-full my-3 font-semibold text-md p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear"
             onClick={(e: React.MouseEvent) => {}}
             image=""
             alt=""
+            height={0}
+            width={0}
+            disabled={false}
           />
         </Link>
         <Link href="/login">
           <Button
             text="Log in"
-            className="text-[#efefef] w-full my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-16 rounded-md sm:text-xl border-2 border-primary-darker outline-none hover:bg-background-lighter hover:border-primary duration-300 ease-linear"
+            className="text-[#efefef] w-full my-3 font-semibold text-md p-3 px-4 sm:p-4 sm:px-16 rounded-md sm:text-xl border-2 border-primary-darker outline-none hover:bg-background-lighter hover:border-primary duration-300 ease-linear"
             image=""
             alt=""
             onClick={(e: React.MouseEvent) => {}}
+            height={0}
+            width={0}
+            disabled={false}
           />
         </Link>
       </div>
