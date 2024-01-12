@@ -23,6 +23,7 @@ const Circles = () => {
             height={0}
             width={0}
             disabled={false}
+            loader={false}
           />
         </Link>
         <Link href="/login">
@@ -35,6 +36,7 @@ const Circles = () => {
             height={0}
             width={0}
             disabled={false}
+            loader={false}
           />
         </Link>
       </div>

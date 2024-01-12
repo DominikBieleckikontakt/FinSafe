@@ -12,6 +12,7 @@ const Button = ({
   width,
   height,
   disabled,
+  loader,
 }: ButtonProps) => {
   const onClickHandler = (e: React.MouseEvent) => {
     onClick(e);
@@ -23,6 +24,9 @@ const Button = ({
       onClick={onClickHandler}
       disabled={disabled}
     >
+      {loader && (
+        <div className="border-white border-t-transparent border-2 border-solid animate-spin h-5 w-5 rounded-full"></div>
+      )}
       {image !== "" && (
         <Image
           src={`${image}`}

@@ -19,6 +19,8 @@ const LogOutButton = () => {
       }
       width={36}
       height={36}
+      loader={false}
+      disabled={false}
     />
   );
 };

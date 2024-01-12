@@ -22,7 +22,7 @@ model User {
 }
 
 model UserBudget {
-    id              String      @id @default(uuid()) @unique
+    id              String      @id @default(cuid()) @unique
     budget          Float
     dailyBudgets    DailyBudget[]
     user            User        @relation(fields: [userId], references: [id])

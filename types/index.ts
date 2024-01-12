@@ -13,6 +13,7 @@ export type ButtonProps = {
   width: number;
   height: number;
   disabled: boolean;
+  loader: boolean;
 };
 
 export type SignUpForm = {

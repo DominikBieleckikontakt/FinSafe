@@ -2,6 +2,7 @@
 import { validateSignUpForm } from "@/lib/utils";
 import { SignUpForm } from "@/types";
 import LogInGoogleButton from "../LogInPage/LogInGoogleButton";
+import { Button } from "..";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -161,12 +162,17 @@ const SignForm = () => {
           <div className="text-red-600 font-bold pl-5">{message}</div>
         )}
         <div className="flex justify-center">
-          <button
+          <Button
             className="text-[#efefef] my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear"
             disabled={isLoading}
-          >
-            Sign up!
-          </button>
+            image=""
+            alt=""
+            width={0}
+            height={0}
+            loader={isLoading}
+            text="Sign up!"
+            onClick={() => {}}
+          />
         </div>
       </form>
       <div className="flex items-center mb-3 md:px-16">

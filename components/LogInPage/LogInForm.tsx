@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-import { Checkbox } from "..";
+import { Button, Checkbox } from "..";
 import { LogInFormType } from "@/types";
 import { LoadingElement } from "..";
 import LogInGoogleButton from "./LogInGoogleButton";
@@ -117,12 +117,17 @@ const LogInForm = () => {
               <div className="text-red-600 font-bold pl-5">{message}</div>
             )}
             <div className="flex justify-center">
-              <button
+              <Button
                 className="text-[#efefef] my-3 font-semibold text-xl p-3 px-4 sm:p-4 sm:px-12 rounded-md sm:text-xl bg-primary-darker border-2 border-transparent outline-none hover:bg-transparent hover:border-primary-darker duration-300 ease-linear"
                 disabled={isLoading}
-              >
-                Log in!
-              </button>
+                image=""
+                alt=""
+                width={0}
+                height={0}
+                loader={isLoading}
+                text="Log in!"
+                onClick={() => {}}
+              />
             </div>
           </form>
           <div className="flex items-center mb-3 md:px-16">
