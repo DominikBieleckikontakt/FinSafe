@@ -9,16 +9,17 @@ const LogInGoogleButton = ({ disabled }: LogInGoogleButtonProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loginHandler = async () => {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       signIn("google", {
-        callbackUrl: "/home",
-        redirect: true,
+        callbackUrl: "http://localhost:3000/home",
       });
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
   return (
     <>
