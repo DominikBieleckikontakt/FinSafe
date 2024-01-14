@@ -32,13 +32,16 @@ export type LogInFormType = {
 declare module "next-auth" {
   interface User {
     name: string | null;
+    email: string | null;
   }
   interface Session {
     user: User & {
       name: string;
+      email: string;
     };
     token: {
       name: string;
+      email: string;
     };
   }
 }
@@ -46,3 +49,14 @@ declare module "next-auth" {
 export type LogOutComponentProps = {
   children: React.ReactNode;
 };
+
+interface User {
+  name: string | null;
+  email: string;
+}
+
+export interface HomeMainCardProps {
+  user: User & {
+    name: string;
+  };
+}

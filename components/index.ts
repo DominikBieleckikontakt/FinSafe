@@ -9,6 +9,7 @@ import LoadingElement from "./UI/Loading";
 import LogOutComponent from "./UI/LogOutComponent";
 import { Checkbox } from "./UI/checkbox";
 import FirstBudgetForm from "./FirstBudgetPage/FirstBudgetForm";
+import MainCard from "./HomePage/MainCard";
 
 export {
   MainPage,
@@ -22,4 +23,5 @@ export {
   LogOutComponent,
   Checkbox,
   FirstBudgetForm,
+  MainCard,
 };
