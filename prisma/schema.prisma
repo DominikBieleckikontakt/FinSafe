@@ -15,7 +15,6 @@ model User {
     email           String?      @unique
     password        String?
     userBudget      UserBudget?
-    emailVerified   DateTime?
     image           String?
     accounts        Account[]
     sessions        Session[]
@@ -23,10 +22,11 @@ model User {
 
 model UserBudget {
     id              String      @id @default(cuid()) @unique
-    budget          Float
+    budget          Float       @default(0)
     dailyBudgets    DailyBudget[]
     user            User        @relation(fields: [userId], references: [id])
     userId          String      @unique
+    createdAt       DateTime    @default(now())
 }
 
 model DailyBudget {

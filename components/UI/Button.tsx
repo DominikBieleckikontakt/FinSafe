@@ -36,7 +36,7 @@ const Button = ({
           className="mr-2"
         />
       )}
-      {text}
+      {!loader && <>{text}</>}
     </button>
   );
 };

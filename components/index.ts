@@ -8,6 +8,7 @@ import LogOutButton from "./UI/LogOutButton";
 import LoadingElement from "./UI/Loading";
 import LogOutComponent from "./UI/LogOutComponent";
 import { Checkbox } from "./UI/checkbox";
+import FirstBudgetForm from "./FirstBudgetPage/FirstBudgetForm";
 
 export {
   MainPage,
@@ -20,4 +21,5 @@ export {
   LoadingElement,
   LogOutComponent,
   Checkbox,
+  FirstBudgetForm,
 };

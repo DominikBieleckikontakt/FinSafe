@@ -35,7 +35,7 @@ const SignForm = () => {
       });
 
       if (res.ok) {
-        router.push("/");
+        router.push(`/signup/first-budget?email=${form.email}`);
         setIsLoading(false);
       } else {
         if (res.status === 409) {
