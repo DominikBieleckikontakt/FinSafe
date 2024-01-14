@@ -32,7 +32,7 @@ const LogInForm = () => {
     });
 
     if (logInData?.error) {
-      const { status } = JSON.parse(logInData?.error);
+      const { status } = JSON.parse(`${logInData?.error}`);
       setIsValid(false);
       setMessage("Oops, something went wrong!");
       status === 402 && setMessage("Wrong password. Try again, please.");
