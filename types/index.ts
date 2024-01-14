@@ -58,5 +58,6 @@ interface User {
 export interface HomeMainCardProps {
   user: User & {
     name: string;
+    email: string;
   };
 }

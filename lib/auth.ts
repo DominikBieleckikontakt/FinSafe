@@ -52,15 +52,7 @@ export const authOptions: NextAuthOptions = {
           );
         }
 
-        // if (existingUser.password) {
-        //   const passwordMatch = await bcrypt.compare(
-        //     credentials.password,
-        //     existingUser.password
-        //   );
-        //   if (!passwordMatch) return null;
-        // } else {
-        //   return null;
-        // }
+        console.log(existingUser.password);
 
         if (existingUser.password) {
           const passwordMatch = await compare(
