@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { signOut } from "next-auth/react";
-import { LogOutComponentProps } from "@/types";
+import { ChildrenProp } from "@/types";
 
-const LogOutComponent = ({ children }: LogOutComponentProps) => {
+const LogOutComponent = ({ children }: ChildrenProp) => {
   return (
     <div
       onClick={() =>

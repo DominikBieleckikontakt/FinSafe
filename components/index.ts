@@ -10,6 +10,9 @@ import LogOutComponent from "./UI/LogOutComponent";
 import { Checkbox } from "./UI/checkbox";
 import FirstBudgetForm from "./FirstBudgetPage/FirstBudgetForm";
 import MainCard from "./HomePage/MainCard";
+import Chart from "./HomePage/Chart";
+import BarChart from "./UI/BarChart";
+import LineChart from "./UI/LineChart";
 
 export {
   MainPage,
@@ -24,4 +27,7 @@ export {
   Checkbox,
   FirstBudgetForm,
   MainCard,
+  Chart,
+  BarChart,
+  LineChart,
 };

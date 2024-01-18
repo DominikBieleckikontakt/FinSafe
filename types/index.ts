@@ -46,7 +46,7 @@ declare module "next-auth" {
   }
 }
 
-export type LogOutComponentProps = {
+export type ChildrenProp = {
   children: React.ReactNode;
 };
 
