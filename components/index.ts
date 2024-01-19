@@ -13,6 +13,7 @@ import MainCard from "./HomePage/MainCard";
 import Chart from "./HomePage/Chart";
 import BarChart from "./UI/BarChart";
 import LineChart from "./UI/LineChart";
+import SideAddCard from "./HomePage/SideAddCard";
 
 export {
   MainPage,
@@ -30,4 +31,5 @@ export {
   Chart,
   BarChart,
   LineChart,
+  SideAddCard,
 };

@@ -31,7 +31,7 @@ model UserBudget {
 
 model DailyBudget {
     id              String      @id @default(uuid()) @unique
-    createdAt       DateTime    @default(now())
+    createdAt       DateTime    @default(dbgenerated("CURRENT_DATE")) @unique
     income          Float
     outcome         Float
     userBudget      UserBudget  @relation(fields: [userBudgetId], references: [id])   

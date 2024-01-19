@@ -1,4 +1,4 @@
-const months = [
+export const months = [
   "January",
   "February",
   "March",
@@ -12,3 +12,9 @@ const months = [
   "November",
   "December",
 ];
+
+export const now = {
+  day: new Date().getDate().toLocaleString(),
+  month: new Date().getMonth().toLocaleString(),
+  year: new Date().getFullYear().toLocaleString(),
+};
