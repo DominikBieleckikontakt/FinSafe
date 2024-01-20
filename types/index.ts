@@ -29,6 +29,11 @@ export type LogInFormType = {
   password: string;
 };
 
+export type TodaysBudgetType = {
+  income: number;
+  outcome: number;
+};
+
 declare module "next-auth" {
   interface User {
     name: string | null;

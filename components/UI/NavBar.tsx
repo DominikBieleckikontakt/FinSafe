@@ -4,8 +4,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
-import { LogOutButton } from "..";
-import { LogOutComponent } from "..";
+import { LogOutButton, LogOutComponent, HomeButton } from "..";
 
 const NavBar = async () => {
   const session = await getServerSession(authOptions);
@@ -26,9 +25,14 @@ const NavBar = async () => {
           </Link>
         )}
       </div>
-      <div className="w-full py-5 flex justify-end">
-        {session?.user && <LogOutButton />}
-      </div>
+      {session?.user ? (
+        <div className="w-full py-5 flex justify-end">
+          <HomeButton />
+          <LogOutButton />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

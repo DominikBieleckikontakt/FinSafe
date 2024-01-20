@@ -14,6 +14,9 @@ import Chart from "./HomePage/Chart";
 import BarChart from "./UI/BarChart";
 import LineChart from "./UI/LineChart";
 import SideAddCard from "./HomePage/SideAddCard";
+import TodaysBudgetSummary from "./HomePage/TodaysBudgetSummary";
+import NotLoggedIn from "./UI/NotLoggedIn";
+import HomeButton from "./UI/HomeButton";
 
 export {
   MainPage,
@@ -32,4 +35,7 @@ export {
   BarChart,
   LineChart,
   SideAddCard,
+  TodaysBudgetSummary,
+  NotLoggedIn,
+  HomeButton,
 };

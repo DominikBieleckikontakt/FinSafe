@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 
 import { months, now } from "@/constants";
-import { HomeMainCardProps } from "@/types";
-import { Chart } from "..";
+import { HomeMainCardProps, TodaysBudgetType } from "@/types";
+import { Chart, SideAddCard, TodaysBudgetSummary } from "..";
 
 const MainCard = ({ user }: HomeMainCardProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isTodaysBudget, setIsTodaysBudget] = useState<boolean>(false);
-  const [todaysBudget, setTodaysBudget] = useState({
+  const [todaysBudget, setTodaysBudget] = useState<TodaysBudgetType>({
     income: 0,
     outcome: 0,
   });
@@ -32,8 +32,8 @@ const MainCard = ({ user }: HomeMainCardProps) => {
       })
       .then((data) => {
         setTodaysBudget({
-          income: data.today.income,
-          outcome: data.today.outcome,
+          income: data.today?.income,
+          outcome: data.today?.outcome,
         });
         if (data.today === null) {
           setIsTodaysBudget(false);
@@ -43,7 +43,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-slate-600 to-slate-700  mx-auto rounded-lg mb-10 shadow-md">
+    <div className="bg-gradient-to-r from-slate-600 to-slate-700 mx-10 md:mx-auto rounded-lg mb-10 shadow-md">
       <div className="p-5 backdrop-blur-lg bg-black bg-opacity-60 h-full w-full rounded-lg">
         {isLoading && (
           <div className="flex flex-col items-center">
@@ -59,34 +59,25 @@ const MainCard = ({ user }: HomeMainCardProps) => {
               </h1>
             </div>
             {isTodaysBudget ? (
-              <div className="text-white sm:flex my-5">
-                <p className="sm:pr-5 py-1 sm:py-0">
-                  Today's income:
-                  <span className="text-primary font-bold ml-1">
-                    ${todaysBudget?.income}
-                  </span>
-                </p>
-                <p className="sm:pl-5 py-1 sm:py-0">
-                  Today's outcome:
-                  <span className="text-primary font-bold ml-1">
-                    ${todaysBudget?.outcome}
-                  </span>
-                </p>
-              </div>
+              <TodaysBudgetSummary todaysBudget={todaysBudget} />
             ) : (
-              <div className="text-white sm:flex my-5 text-xl font-light">
+              <div className="text-white sm:flex mb-5 text-xl font-light">
                 <p>
                   You didn't added today's budget. Maybe you want to do that?
                 </p>
               </div>
             )}
 
-            <div>
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="md:grid md:grid-cols-subgrid md:row-span-2 md:col-span-2 bg-blue-500 text-white">
                 <Chart />
               </div>
-              <div>{/* SIDE CARD I */}</div>
-              <div>{/* SIDE CARD II */}</div>
+              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700">
+                <SideAddCard />
+              </div>
+              <div className="text-white bg-red-500">
+                {/* SIDE CARD II */}sdsd
+              </div>
             </div>
           </>
         )}
