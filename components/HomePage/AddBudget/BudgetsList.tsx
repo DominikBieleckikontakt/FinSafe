@@ -1,15 +1,21 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 import { BudgetElement, LoadMore } from "../../";
 import { AllBudgetInfoType } from "@/types";
 
-const BudgetsList = () => {
+const BudgetsList = ({ data }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>([]);
   const [message, setMessage] = useState<string>("");
 
-  useMemo(() => {
+  useEffect(() => {
+    if (data !== null) {
+      setBudgets((prevState) => [data, ...prevState]);
+    }
+  }, [data]);
+
+  useEffect(() => {
     setIsLoading(true);
     fetch("/api/home/dailybudgets", {
       method: "POST",
@@ -42,7 +48,7 @@ const BudgetsList = () => {
         </div>
       )}
       {budgets === null && <p>{message}</p>}
-      {budgets !== null && (
+      {budgets.length > 0 && (
         <ul className="list-none -mb-10">
           {budgets.map((item, id) => (
             <BudgetElement key={id} budget={item} />

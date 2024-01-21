@@ -24,7 +24,7 @@ const BudgetElement: React.FC<{ budget: AllBudgetInfoType }> = ({ budget }) => {
         </p>
         <p className="my-2">
           Your outcome:{" "}
-          <span className="text-red-500 font-bold">${budget.income}</span>
+          <span className="text-red-500 font-bold">${budget.outcome}</span>
         </p>
       </div>
       {todaysBudget > 0 ? (

@@ -47,6 +47,10 @@ export type AllBudgetInfoType = {
   todaysBudget: number;
 };
 
+export type AddNew = {
+  getData: (budget: AllBudgetInfoType) => void;
+};
+
 declare module "next-auth" {
   interface User {
     name: string | null;
