@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { months, now } from "@/constants";
 import { HomeMainCardProps, TodaysBudgetType } from "@/types";
 import { Chart, SideAddCard, TodaysBudgetSummary } from "..";
 
@@ -28,6 +27,9 @@ const MainCard = ({ user }: HomeMainCardProps) => {
         if (res.status === 201) {
           setIsTodaysBudget(true);
         }
+        if (res.status === 202) {
+          setIsTodaysBudget(false);
+        }
         return res.json();
       })
       .then((data) => {
@@ -43,7 +45,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-slate-600 to-slate-700 mx-10 md:mx-auto rounded-lg mb-10 shadow-md">
+    <div className="bg-gradient-to-r from-slate-600 to-slate-700 mx-auto max-sm:mx-10 max-md:mx-16 md:w-[600px] lg:w-[900px] rounded-lg mb-10 shadow-lg">
       <div className="p-5 backdrop-blur-lg bg-black bg-opacity-60 h-full w-full rounded-lg">
         {isLoading && (
           <div className="flex flex-col items-center">

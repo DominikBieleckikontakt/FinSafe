@@ -34,6 +34,19 @@ export type TodaysBudgetType = {
   outcome: number;
 };
 
+export type BudgetsType = {
+  income: number;
+  outcome: number;
+  createdAt: Date;
+};
+
+export type AllBudgetInfoType = {
+  income: number;
+  outcome: number;
+  createdAt: Date;
+  todaysBudget: number;
+};
+
 declare module "next-auth" {
   interface User {
     name: string | null;

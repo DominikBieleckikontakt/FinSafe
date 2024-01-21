@@ -34,6 +34,7 @@ model DailyBudget {
     createdAt       DateTime    @default(dbgenerated("CURRENT_DATE")) @unique
     income          Float
     outcome         Float
+    todaysBudget    Float
     userBudget      UserBudget  @relation(fields: [userBudgetId], references: [id])   
     userBudgetId    String
 }

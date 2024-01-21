@@ -36,6 +36,15 @@ export async function POST(req: Request) {
       );
     }
 
+    // await prisma.dailyBudget.create({
+    //   data: {
+    //     userBudgetId: budget?.id,
+    //     income: 30,
+    //     outcome: 10,
+    //     todaysBudget: budget.budget,
+    //   },
+    // });
+
     const todaysBudget = await prisma.dailyBudget.findUnique({
       where: {
         userBudgetId: budget?.id,

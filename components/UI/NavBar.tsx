@@ -11,7 +11,7 @@ const NavBar = async () => {
 
   return (
     <div className="flex w-full">
-      <div className="text-white text-3xl py-10 font-light italic pl-24 sm:text-left w-full">
+      <div className="text-white text-3xl py-10 font-light italic pl-10 sm:pl-24 sm:text-left w-full">
         {session?.user && (
           <LogOutComponent>
             <Link href="/">

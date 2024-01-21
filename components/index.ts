@@ -17,6 +17,10 @@ import SideAddCard from "./HomePage/SideAddCard";
 import TodaysBudgetSummary from "./HomePage/TodaysBudgetSummary";
 import NotLoggedIn from "./UI/NotLoggedIn";
 import HomeButton from "./UI/HomeButton";
+import AddNewCard from "./HomePage/AddBudget/AddNewCard";
+import BudgetsList from "./HomePage/AddBudget/BudgetsList";
+import BudgetElement from "./HomePage/AddBudget/BudgetElement";
+import LoadMore from "./HomePage/AddBudget/LoadMore";
 
 export {
   MainPage,
@@ -38,4 +42,8 @@ export {
   TodaysBudgetSummary,
   NotLoggedIn,
   HomeButton,
+  AddNewCard,
+  BudgetsList,
+  BudgetElement,
+  LoadMore,
 };
