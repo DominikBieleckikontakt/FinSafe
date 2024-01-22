@@ -1,8 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { easeInOut } from "framer-motion";
 
 import { HomeMainCardProps, TodaysBudgetType } from "@/types";
-import { Chart, SideAddCard, TodaysBudgetSummary } from "..";
+import { Chart, SideAddCard, TodaysBudgetSummary, MotionDiv } from "..";
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: "-50%",
+  },
+  visible: {
+    opacity: 1,
+    y: "0%",
+  },
+};
+
+const opacityVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+};
 
 const MainCard = ({ user }: HomeMainCardProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,7 +66,18 @@ const MainCard = ({ user }: HomeMainCardProps) => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-slate-600 to-slate-700 mx-auto max-sm:mx-10 max-md:mx-16 md:w-[600px] lg:w-[900px] rounded-lg mb-10 shadow-lg">
+    <MotionDiv
+      className="bg-gradient-to-r from-slate-600 to-slate-700 mx-auto max-sm:mx-10 max-md:mx-16 md:w-[600px] lg:w-[900px] rounded-lg mb-10 shadow-lg"
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        delay: 0,
+        ease: easeInOut,
+        duration: 0.8,
+      }}
+      viewport={{ amount: 0 }}
+    >
       <div className="p-5 backdrop-blur-lg bg-black bg-opacity-60 h-full w-full rounded-lg">
         {isLoading && (
           <div className="flex flex-col items-center">
@@ -54,7 +86,17 @@ const MainCard = ({ user }: HomeMainCardProps) => {
           </div>
         )}
         {!isLoading && (
-          <>
+          <MotionDiv
+            variants={opacityVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{
+              delay: 0,
+              ease: easeInOut,
+              duration: 0.6,
+            }}
+            viewport={{ amount: 0 }}
+          >
             <div className="text-white">
               <h1 className="text-2xl font-light">
                 Hello <b className="text-primary font-bold">{user.name}</b>
@@ -81,10 +123,10 @@ const MainCard = ({ user }: HomeMainCardProps) => {
                 {/* SIDE CARD II */}sdsd
               </div>
             </div>
-          </>
+          </MotionDiv>
         )}
       </div>
-    </div>
+    </MotionDiv>
   );
 };
 

@@ -1,4 +1,4 @@
-import { SignUpForm } from "@/types";
+import { AllBudgetInfoType, SignUpForm } from "@/types";
 
 export const validateSignUpForm = (formData: SignUpForm) => {
   let isCorrect = true;
@@ -34,4 +34,30 @@ export const validateSignUpForm = (formData: SignUpForm) => {
   }
 
   return { isCorrect, message };
+};
+
+export const calculateBudget = (
+  newIncome: string,
+  newOutcome: string,
+  budget: AllBudgetInfoType,
+  setNewData: (budget: AllBudgetInfoType) => void
+) => {
+  const actualIncome =
+    budget.income > Number(newIncome)
+      ? budget.income - Number(newIncome)
+      : Number(newIncome) - budget.income;
+
+  const actualOutcome =
+    budget.outcome > Number(newOutcome)
+      ? Number(newOutcome) - budget.outcome
+      : (budget.outcome - Number(newOutcome)) * -1;
+
+  const newOverallBudget = budget.todaysBudget + actualIncome - actualOutcome;
+
+  setNewData({
+    ...budget,
+    todaysBudget: newOverallBudget,
+    income: Number(newIncome),
+    outcome: Number(newOutcome),
+  });
 };

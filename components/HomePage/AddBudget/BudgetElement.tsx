@@ -1,10 +1,33 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 import { AllBudgetInfoType } from "@/types";
 import { months } from "@/constants";
+import {
+  Button,
+  EditBudgetCard,
+  MotionDiv,
+  ViewBudgetCard,
+} from "@/components";
+import { easeInOut } from "framer-motion";
+import { calculateBudget } from "@/lib/utils";
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: "50%",
+  },
+  visible: {
+    opacity: 1,
+    y: "0%",
+  },
+};
 
 const BudgetElement: React.FC<{ budget: AllBudgetInfoType }> = ({ budget }) => {
-  const { createdAt, todaysBudget } = budget;
+  const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
+  const [newData, setNewData] = useState(budget);
+
+  const { createdAt } = budget;
 
   const date = {
     day: new Date(createdAt).getDate(),
@@ -12,33 +35,53 @@ const BudgetElement: React.FC<{ budget: AllBudgetInfoType }> = ({ budget }) => {
     year: new Date(createdAt).getFullYear(),
   };
 
+  const toggleEditModeHandler = () => {
+    setIsEditingMode(!isEditingMode);
+  };
+
+  //Changing existing data to new one, edited in edit mode
+  const changeDataHandler = (newIncome: string, newOutcome: string) => {
+    calculateBudget(newIncome, newOutcome, budget, setNewData);
+
+    //TO DO: SENDING DATA FROM newData TO DB
+  };
+
   return (
-    <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10">
-      <h3 className="text-xl font-bold text-primary-darker">
-        {date.day} {date.month} {date.year}
-      </h3>
-      <div className="ml-1">
-        <p className="my-2">
-          Your income:{" "}
-          <span className="text-primary font-bold">${budget.income}</span>
-        </p>
-        <p className="my-2">
-          Your outcome:{" "}
-          <span className="text-red-500 font-bold">${budget.outcome}</span>
-        </p>
+    <>
+      <div>
+        <MotionDiv
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{
+            delay: 0.1,
+            ease: easeInOut,
+            duration: 0.8,
+          }}
+          viewport={{ amount: 0 }}
+        >
+          <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10 flex justify-between">
+            {!isEditingMode && (
+              <ViewBudgetCard
+                budget={newData}
+                todaysBudget={newData.todaysBudget}
+                date={date}
+                onChangeMode={toggleEditModeHandler}
+              />
+            )}
+            {isEditingMode && (
+              <EditBudgetCard
+                budget={newData}
+                todaysBudget={newData.todaysBudget}
+                date={date}
+                onChangeMode={toggleEditModeHandler}
+                onChangeData={changeDataHandler}
+              />
+            )}
+          </div>
+        </MotionDiv>
       </div>
-      {todaysBudget > 0 ? (
-        <div className="w-full text-right text-xl">
-          Overall budget:{" "}
-          <span className="text-primary font-bold">${todaysBudget}</span>
-        </div>
-      ) : (
-        <div className="w-full text-right text-xl">
-          Overall budget:{" "}
-          <span className="text-red-500 font-bold">${todaysBudget}</span>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

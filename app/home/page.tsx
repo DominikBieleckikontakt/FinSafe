@@ -10,7 +10,7 @@ const Home = async () => {
   if (session?.user) {
     return (
       <div className="overflow-x-hidden overflow-y-hidden">
-        <div className="flex justify-center items-center mt-36 h-full">
+        <div className="flex justify-center items-center mt-10 sm:mt-36 h-full">
           <MainCard user={session?.user} />
         </div>
       </div>

@@ -21,6 +21,9 @@ import AddNewCard from "./HomePage/AddBudget/AddNewCard";
 import BudgetsList from "./HomePage/AddBudget/BudgetsList";
 import BudgetElement from "./HomePage/AddBudget/BudgetElement";
 import LoadMore from "./HomePage/AddBudget/LoadMore";
+import { MotionDiv } from "./UI/MotionDiv";
+import ViewBudgetCard from "./HomePage/AddBudget/ViewBudgetCard";
+import EditBudgetCard from "./HomePage/AddBudget/EditBudgetCard";
 
 export {
   MainPage,
@@ -46,4 +49,7 @@ export {
   BudgetsList,
   BudgetElement,
   LoadMore,
+  MotionDiv,
+  ViewBudgetCard,
+  EditBudgetCard,
 };

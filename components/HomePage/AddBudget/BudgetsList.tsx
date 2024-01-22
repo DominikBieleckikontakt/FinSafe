@@ -1,10 +1,27 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { easeInOut } from "framer-motion";
 
 import { BudgetElement, LoadMore } from "../../";
 import { AllBudgetInfoType } from "@/types";
+import { MotionDiv } from "../../";
 
-const BudgetsList = ({ data }: any) => {
+type SpecialBudgetType = {
+  data: AllBudgetInfoType;
+};
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: "50%",
+  },
+  visible: {
+    opacity: 1,
+    y: "0%",
+  },
+};
+
+const BudgetsList = ({ data }: SpecialBudgetType) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>([]);
   const [message, setMessage] = useState<string>("");
@@ -49,13 +66,25 @@ const BudgetsList = ({ data }: any) => {
       )}
       {budgets === null && <p>{message}</p>}
       {budgets.length > 0 && (
-        <ul className="list-none -mb-10">
-          {budgets.map((item, id) => (
-            <BudgetElement key={id} budget={item} />
-          ))}
-        </ul>
+        <MotionDiv
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          transition={{
+            delay: 0.1,
+            ease: easeInOut,
+            duration: 0.8,
+          }}
+          viewport={{ amount: 0 }}
+        >
+          <ul className="list-none -mb-10">
+            {budgets.map((item, id) => (
+              <BudgetElement key={id} budget={item} />
+            ))}
+          </ul>
+        </MotionDiv>
       )}
-      {budgets.length >= 8 && <LoadMore />}
+      {budgets?.length >= 8 && <LoadMore />}
     </div>
   );
 };

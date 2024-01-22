@@ -1,9 +1,22 @@
 "use client";
 import React, { useState } from "react";
+import { MotionDiv } from "@/components";
+import { easeInOut } from "framer-motion";
 
 import { now } from "@/constants";
 import { Button } from "@/components";
 import { AddNew } from "@/types";
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: "-30%",
+  },
+  visible: {
+    opacity: 1,
+    y: "0%",
+  },
+};
 
 const AddNewCard = ({ getData }: AddNew | null) => {
   const [income, setIncome] = useState<string>("");
@@ -44,7 +57,18 @@ const AddNewCard = ({ getData }: AddNew | null) => {
   };
 
   return (
-    <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg">
+    <MotionDiv
+      className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg"
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      transition={{
+        delay: 0.5,
+        ease: easeInOut,
+        duration: 0.8,
+      }}
+      viewport={{ amount: 0 }}
+    >
       <h2 className="text-xl">Add your today's budget</h2>
       <p className="text-sm text-zinc-400">
         Date:{" "}
@@ -100,7 +124,7 @@ const AddNewCard = ({ getData }: AddNew | null) => {
           </div>
         </form>
       </div>
-    </div>
+    </MotionDiv>
   );
 };
 
