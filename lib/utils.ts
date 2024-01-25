@@ -44,7 +44,7 @@ export const calculateBudget = (
 ) => {
   const actualIncome =
     budget.income > Number(newIncome)
-      ? budget.income - Number(newIncome)
+      ? (budget.income - Number(newIncome)) * -1
       : Number(newIncome) - budget.income;
 
   const actualOutcome =
@@ -60,4 +60,10 @@ export const calculateBudget = (
     income: Number(newIncome),
     outcome: Number(newOutcome),
   });
+
+  return {
+    updatedIncome: Number(newIncome),
+    updatedOutcome: Number(newOutcome),
+    overallBudget: newOverallBudget,
+  };
 };

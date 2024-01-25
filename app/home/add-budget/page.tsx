@@ -7,7 +7,7 @@ import React, { useState } from "react";
 const AddBudget = () => {
   const [data, setData] = useState<AllBudgetInfoType | null>(null);
 
-  const getNewBudget = (e: any) => {
+  const getNewBudget = (e: AllBudgetInfoType) => {
     setData(e);
   };
 

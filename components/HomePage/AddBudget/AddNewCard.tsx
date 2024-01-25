@@ -18,7 +18,7 @@ const variants = {
   },
 };
 
-const AddNewCard = ({ getData }: AddNew | null) => {
+const AddNewCard = ({ getData }: AddNew) => {
   const [income, setIncome] = useState<string>("");
   const [outcome, setOutcome] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);

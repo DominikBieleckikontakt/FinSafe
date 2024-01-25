@@ -6,10 +6,15 @@ const ViewBudgetCard: React.FC<{
   todaysBudget: number;
   date: any;
   budget: AllBudgetInfoType;
-  onChangeMode: (newIncome: string, newOutcome: string) => void;
-}> = ({ todaysBudget, date, budget, onChangeMode }) => {
+  onChangeMode: () => void;
+  onDelete: (date: Date) => void;
+}> = ({ todaysBudget, date, budget, onChangeMode, onDelete }) => {
   const changeModeHandler = () => {
-    onChangeMode("", "");
+    onChangeMode();
+  };
+
+  const onDeleteHandler = () => {
+    onDelete(budget.createdAt);
   };
 
   return (
@@ -51,7 +56,7 @@ const ViewBudgetCard: React.FC<{
             alt="edit"
             disabled={false}
             loader={false}
-            onClick={() => {}}
+            onClick={onDeleteHandler}
           />
         </div>
         <div>

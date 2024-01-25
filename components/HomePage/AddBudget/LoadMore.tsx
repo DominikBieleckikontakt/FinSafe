@@ -5,7 +5,10 @@ import { BudgetElement, Button } from "../../";
 
 let skip: number = 8;
 
-const LoadMore = () => {
+const LoadMore: React.FC<{
+  onDelete: (date: Date) => void;
+  onEdit: () => void;
+}> = ({ onDelete, onEdit }) => {
   const [data, setData] = useState<AllBudgetInfoType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -33,7 +36,12 @@ const LoadMore = () => {
     <div className="flex justify-center flex-col items-center w-full">
       <ul className="list-none w-full">
         {data.map((item, id) => (
-          <BudgetElement key={id} budget={item} />
+          <BudgetElement
+            onDelete={onDelete}
+            onEdit={onEdit}
+            key={id}
+            budget={item}
+          />
         ))}
       </ul>
       <Button
