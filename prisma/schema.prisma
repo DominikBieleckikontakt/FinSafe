@@ -31,7 +31,7 @@ model UserBudget {
 
 model DailyBudget {
     id              String      @id @default(uuid()) @unique
-    createdAt       DateTime    @default(dbgenerated("CURRENT_DATE")) @unique
+    createdAt       DateTime    @default(dbgenerated("CURRENT_DATE"))
     income          Float
     outcome         Float
     todaysBudget    Float
