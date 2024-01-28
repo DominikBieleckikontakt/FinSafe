@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       },
     });
 
-    await prisma.dailyBudget.update({
+    await prisma.dailyBudget.updateMany({
       where: {
         userBudgetId: userBudget.id,
         createdAt,

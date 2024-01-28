@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       },
     });
 
-    const dailyBudget = await prisma.dailyBudget.findUnique({
+    const dailyBudget = await prisma.dailyBudget.findFirst({
       where: {
         userBudgetId: userBudget.id,
         createdAt,
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       },
     });
 
-    await prisma.dailyBudget.delete({
+    await prisma.dailyBudget.deleteMany({
       where: {
         userBudgetId: userBudget.id,
         createdAt,

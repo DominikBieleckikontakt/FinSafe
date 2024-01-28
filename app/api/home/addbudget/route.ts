@@ -54,7 +54,7 @@ export async function POST(req: Request) {
       },
     });
 
-    const isTodaysBudgetExist = await prisma.dailyBudget.findUnique({
+    const isTodaysBudgetExist = await prisma.dailyBudget.findFirst({
       where: {
         createdAt: new Date(`${now.year}-${now.month + 1}-${now.day}`),
         userBudgetId: budget.id,

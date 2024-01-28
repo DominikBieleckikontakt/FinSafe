@@ -39,8 +39,8 @@ export const validateSignUpForm = (formData: SignUpForm) => {
 export const calculateBudget = (
   newIncome: string,
   newOutcome: string,
-  budget: AllBudgetInfoType,
-  setNewData: (budget: AllBudgetInfoType) => void
+  budget: AllBudgetInfoType
+  // setNewData: (budget: AllBudgetInfoType) => void
 ) => {
   const actualIncome =
     budget.income > Number(newIncome)
@@ -54,12 +54,12 @@ export const calculateBudget = (
 
   const newOverallBudget = budget.todaysBudget + actualIncome - actualOutcome;
 
-  setNewData({
-    ...budget,
-    todaysBudget: newOverallBudget,
-    income: Number(newIncome),
-    outcome: Number(newOutcome),
-  });
+  // setNewData({
+  //   ...budget,
+  //   todaysBudget: newOverallBudget,
+  //   income: Number(newIncome),
+  //   outcome: Number(newOutcome),
+  // });
 
   return {
     updatedIncome: Number(newIncome),

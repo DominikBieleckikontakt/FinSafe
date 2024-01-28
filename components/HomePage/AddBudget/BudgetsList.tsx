@@ -25,40 +25,69 @@ const variants = {
 
 const BudgetsList = ({ data }: SpecialBudgetType) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>(null);
+  const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>([]);
   const [message, setMessage] = useState<string>(
     "You don't have budget history or something gone wrong"
   );
 
-  //Getting list of budgets from DB
+  // Adding new data to the list
+  useEffect(() => {
+    if (data !== null && data !== undefined) {
+      if (budgets?.length > 0) {
+        setBudgets((prevState) => [
+          {
+            income: data.income,
+            outcome: data.outcome,
+            createdAt: data.createdAt,
+            todaysBudget: data.todaysBudget,
+          },
+          ...prevState,
+        ]);
+      } else {
+        setBudgets([
+          {
+            income: data.income,
+            outcome: data.outcome,
+            createdAt: data.createdAt,
+            todaysBudget: data.todaysBudget,
+          },
+        ]);
+      }
+    }
+  }, [data]);
+
+  // Getting list of budgets from DB
   useEffect(() => {
     setIsLoading(true);
-    fetch("/api/home/dailybudgets", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        limit: 0,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 403) {
-          setMessage("You don't have budget history or something gone wrong");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setBudgets(data.budgets);
-        setIsLoading(false);
+
+    const getData = async () => {
+      return await fetchData("/api/home/dailybudgets", {
+        method: "POST",
+        body: {
+          limit: 0,
+        },
       });
-  }, [data]);
+    };
+
+    getData().then((fetchedData) => {
+      if (fetchedData.budgets !== null) {
+        // if (budgets?.length > 0) {
+        //   setBudgets((prevState) => [...prevState, ...fetchedData.budgets]);
+        // } else {
+        //   setBudgets([...fetchedData.budgets]);
+        // }
+        setBudgets([...fetchedData.budgets]);
+      }
+    });
+
+    setIsLoading(false);
+  }, []);
 
   const onDeleteHandler = async (createdAt: Date) => {
     const filteredBudgets = budgets.filter(
       (item) => item.createdAt !== createdAt
     );
-    setBudgets(filteredBudgets);
+    console.log(filteredBudgets);
     toast.success("Deleted", {
       style: {
         background: "#333",
@@ -68,9 +97,11 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
 
     if (filteredBudgets.length === 0) {
       setBudgets(null);
+    } else {
+      setBudgets(filteredBudgets);
     }
 
-    const data = fetchData("/api/home/deletebudget", {
+    fetchData("/api/home/deletebudget", {
       method: "POST",
       body: {
         createdAt,
@@ -96,10 +127,10 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
             <p className="text-white mb-10 mt-1">We are loading your data...</p>
           </div>
         )}
-        {budgets === null && !isLoading && (
+        {(budgets?.length === 0 || budgets === null) && !isLoading && (
           <p className="text-white text-center font-bold text-xl">{message}</p>
         )}
-        {budgets?.length > 0 && (
+        {budgets?.length > 0 && !isLoading && (
           <MotionDiv
             variants={variants}
             initial="hidden"

@@ -25,7 +25,7 @@ const BudgetElement: React.FC<{
   onEdit: () => void;
 }> = ({ budget, onDelete, onEdit }) => {
   const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
-  const [newData, setNewData] = useState(budget);
+  // const [newData, setNewData] = useState({ ...budget });
   const { createdAt } = budget;
 
   const date = {
@@ -33,6 +33,10 @@ const BudgetElement: React.FC<{
     month: months[new Date(createdAt).getMonth()],
     year: new Date(createdAt).getFullYear(),
   };
+
+  // console.log(
+  //   "newData: " + JSON.stringify(newData) + " budget: " + JSON.stringify(budget)
+  // );
 
   const deleteBudgetHandler = (passedDate: Date) => {
     onDelete(passedDate);
@@ -47,9 +51,14 @@ const BudgetElement: React.FC<{
     const { updatedIncome, updatedOutcome, overallBudget } = calculateBudget(
       newIncome,
       newOutcome,
-      budget,
-      setNewData
+      budget
+      // setNewData
     );
+
+    budget.income = updatedIncome;
+    budget.outcome = updatedOutcome;
+    budget.todaysBudget = overallBudget;
+    budget.createdAt = createdAt;
 
     //TO DO: SENDING DATA FROM newData TO DB
     await fetchData("/api/home/editbudget", {
@@ -82,8 +91,8 @@ const BudgetElement: React.FC<{
           <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10 flex justify-between">
             {!isEditingMode && (
               <ViewBudgetCard
-                budget={newData}
-                todaysBudget={newData.todaysBudget}
+                budget={budget}
+                todaysBudget={budget.todaysBudget}
                 date={date}
                 onChangeMode={toggleEditModeHandler}
                 onDelete={deleteBudgetHandler}
@@ -91,8 +100,8 @@ const BudgetElement: React.FC<{
             )}
             {isEditingMode && (
               <EditBudgetCard
-                budget={newData}
-                todaysBudget={newData.todaysBudget}
+                budget={budget}
+                todaysBudget={budget.todaysBudget}
                 date={date}
                 onChangeMode={toggleEditModeHandler}
                 onChangeData={changeDataHandler}

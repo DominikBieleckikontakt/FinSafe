@@ -113,7 +113,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:grid md:grid-cols-subgrid md:row-span-2 md:col-span-2 bg-blue-500 text-white">
+              <div className="md:grid md:grid-cols-subgrid md:row-span-2 md:col-span-2 text-white">
                 <Chart />
               </div>
               <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700">

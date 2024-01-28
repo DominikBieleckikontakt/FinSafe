@@ -44,7 +44,6 @@ export async function POST(req: Request) {
         userBudgetId: userBudget?.id,
       },
       take: 8,
-      skip: limit,
       orderBy: {
         createdAt: "desc",
       },
