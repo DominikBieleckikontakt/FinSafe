@@ -25,7 +25,6 @@ const BudgetElement: React.FC<{
   onEdit: () => void;
 }> = ({ budget, onDelete, onEdit }) => {
   const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
-  // const [newData, setNewData] = useState({ ...budget });
   const { createdAt } = budget;
 
   const date = {
@@ -33,10 +32,6 @@ const BudgetElement: React.FC<{
     month: months[new Date(createdAt).getMonth()],
     year: new Date(createdAt).getFullYear(),
   };
-
-  // console.log(
-  //   "newData: " + JSON.stringify(newData) + " budget: " + JSON.stringify(budget)
-  // );
 
   const deleteBudgetHandler = (passedDate: Date) => {
     onDelete(passedDate);
@@ -52,7 +47,6 @@ const BudgetElement: React.FC<{
       newIncome,
       newOutcome,
       budget
-      // setNewData
     );
 
     budget.income = updatedIncome;
@@ -75,42 +69,39 @@ const BudgetElement: React.FC<{
   };
 
   return (
-    <>
-      <div>
-        <MotionDiv
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          transition={{
-            delay: 0.1,
-            ease: easeInOut,
-            duration: 0.8,
-          }}
-          viewport={{ once: true }}
-        >
-          <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10 flex justify-between">
-            {!isEditingMode && (
-              <ViewBudgetCard
-                budget={budget}
-                todaysBudget={budget.todaysBudget}
-                date={date}
-                onChangeMode={toggleEditModeHandler}
-                onDelete={deleteBudgetHandler}
-              />
-            )}
-            {isEditingMode && (
-              <EditBudgetCard
-                budget={budget}
-                todaysBudget={budget.todaysBudget}
-                date={date}
-                onChangeMode={toggleEditModeHandler}
-                onChangeData={changeDataHandler}
-              />
-            )}
-          </div>
-        </MotionDiv>
+    <MotionDiv
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      transition={{
+        delay: 0.5,
+        ease: easeInOut,
+        duration: 0.8,
+      }}
+      viewport={{ once: true }}
+    >
+      <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10 flex justify-between">
+        {!isEditingMode && (
+          <ViewBudgetCard
+            budget={budget}
+            todaysBudget={budget.todaysBudget}
+            date={date}
+            onChangeMode={toggleEditModeHandler}
+            onDelete={deleteBudgetHandler}
+          />
+        )}
+        {isEditingMode && (
+          <EditBudgetCard
+            budget={budget}
+            todaysBudget={budget.todaysBudget}
+            date={date}
+            onChangeMode={toggleEditModeHandler}
+            onChangeData={changeDataHandler}
+          />
+        )}
       </div>
-    </>
+    </MotionDiv>
   );
 };
 

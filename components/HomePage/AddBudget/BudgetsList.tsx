@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { easeInOut } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 
 import { BudgetElement, LoadMore } from "../../";
@@ -43,6 +43,12 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
           },
           ...prevState,
         ]);
+        toast.success("Budget added", {
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+        });
       } else {
         setBudgets([
           {
@@ -52,6 +58,12 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
             todaysBudget: data.todaysBudget,
           },
         ]);
+        toast.success("Budget added", {
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+        });
       }
     }
   }, [data]);
@@ -127,7 +139,7 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
             <p className="text-white mb-10 mt-1">We are loading your data...</p>
           </div>
         )}
-        {(budgets?.length === 0 || budgets === null) && !isLoading && (
+        {!isLoading && (budgets?.length === 0 || budgets === null) && (
           <p className="text-white text-center font-bold text-xl">{message}</p>
         )}
         {budgets?.length > 0 && !isLoading && (
