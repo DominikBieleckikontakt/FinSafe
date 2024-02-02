@@ -8,7 +8,7 @@ export const fetchData = async (url: string, options?: Options) => {
 
   console.log(process.env.URL);
   console.log(url);
-  const res = await fetch(`${process.env.URL}${url}`, {
+  const res = await fetch(`https://finssafe.vercel.app${url}`, {
     method: options.method,
     headers: {
       "Content-Type": "application/json",
