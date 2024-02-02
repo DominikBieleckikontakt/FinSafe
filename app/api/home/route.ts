@@ -74,7 +74,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(
-      { message: "POST request", today: todaysBudget },
+      { message: "Request responded", today: todaysBudget, status: 201 },
       { status: 201 }
     );
   } catch (error) {

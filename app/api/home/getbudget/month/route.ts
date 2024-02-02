@@ -49,6 +49,7 @@ export async function POST(req: Request) {
       {
         message: "Data fetched",
         budgets,
+        status: 200,
       },
       { status: 200 }
     );

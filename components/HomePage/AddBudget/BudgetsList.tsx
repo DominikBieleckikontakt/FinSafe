@@ -8,7 +8,7 @@ import { fetchData } from "@/lib/server-utils";
 
 const BudgetsList = ({ data, email }: SpecialBudgetType) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isBudgets, setIsBudgets] = useState(true);
+  const [isBudgets, setIsBudgets] = useState(false);
   const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>([]);
 
   const message = "You don't have budget history or something gone wrong";
@@ -66,12 +66,13 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
     };
 
     getData().then((fetchedData) => {
-      if (fetchedData.budgets !== null) {
-        setBudgets([...fetchedData.budgets]);
-      }
       if (fetchedData === 403) {
         setIsBudgets(false);
+      } else if (fetchedData.budgets !== null) {
+        setBudgets([...fetchedData.budgets]);
+        setIsBudgets(true);
       }
+
       setIsLoading(false);
     });
     setIsLoading(false);
@@ -81,19 +82,17 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
     const filteredBudgets = budgets.filter(
       (item) => item.createdAt !== createdAt
     );
-    console.log(filteredBudgets);
+    if (filteredBudgets.length === 0) {
+      setIsBudgets(false);
+      setBudgets(filteredBudgets);
+    }
+
     toast.success("Deleted", {
       style: {
         background: "#333",
         color: "#fff",
       },
     });
-
-    if (filteredBudgets.length === 0) {
-      setBudgets(null);
-    } else {
-      setBudgets(filteredBudgets);
-    }
 
     fetchData("/api/home/deletebudget", {
       method: "POST",
@@ -122,7 +121,7 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
             <p className="text-white mb-10 mt-1">We are loading your data...</p>
           </div>
         )}
-        {!isLoading && !isBudgets && (
+        {!isLoading && !isBudgets && budgets.length === 0 && (
           <p className="text-white text-center font-bold text-xl">{message}</p>
         )}
         {budgets?.length > 0 && !isLoading && (

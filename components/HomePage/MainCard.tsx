@@ -53,33 +53,6 @@ const MainCard = ({ user }: HomeMainCardProps) => {
       }
     });
     setIsLoading(false);
-    // fetch(`/api/home`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: user.email,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     if (res.status === 201) {
-    //       setIsTodaysBudget(true);
-    //     }
-    //     if (res.status === 202) {
-    //       setIsTodaysBudget(false);
-    //     }
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     setTodaysBudget({
-    //       income: data.today?.income,
-    //       outcome: data.today?.outcome,
-    //     });
-    // if (data.today === null) {
-    //   setIsTodaysBudget(false);
-    // }
-    // });
   }, []);
 
   return (
