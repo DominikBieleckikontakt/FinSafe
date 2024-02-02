@@ -45,10 +45,13 @@ export async function POST(req: Request) {
       };
     });
 
-    return NextResponse.json({
-      message: "Data fetched",
-      budgets,
-    });
+    return NextResponse.json(
+      {
+        message: "Data fetched",
+        budgets,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "Something gone wrong!", error },
