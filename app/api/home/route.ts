@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     const { email } = body;
 
     const user = await prisma.user.findUnique({
-      where: { email },
+      where: { email: email },
     });
 
     if (!user) {
@@ -78,6 +78,6 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error) {
-    return NextResponse.json({ message: "Error" }, { status: 500 });
+    return NextResponse.json({ message: "Error", error }, { status: 500 });
   }
 }
