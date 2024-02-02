@@ -46,8 +46,8 @@ export async function POST(req: Request) {
 
     let day: string;
     day = Number(now.day) < 10 ? `0${Number(now.day)}` : `${Number(now.day)}`;
-    console.log(`${now.year}-${month}-${day}`);
-    console.log(new Date(`${now.year}-${month}-${day}`));
+    console.log(`${Number(now.year)}-${month}-${day}`);
+    console.log(new Date(`${Number(now.year)}-${month}-${day}`));
 
     const isTodaysBudgetExist = await prisma.dailyBudget.findFirst({
       where: {
