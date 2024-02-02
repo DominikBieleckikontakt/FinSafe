@@ -122,14 +122,9 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
             <p className="text-white mb-10 mt-1">We are loading your data...</p>
           </div>
         )}
-        {!isLoading &&
-          !isBudgets &&
-          (budgets.length === 0 ||
-            (budgets === null && (
-              <p className="text-white text-center font-bold text-xl">
-                {message}
-              </p>
-            )))}
+        {!isLoading && !isBudgets && (
+          <p className="text-white text-center font-bold text-xl">{message}</p>
+        )}
         {budgets?.length > 0 && !isLoading && (
           <ul className="list-none -mb-10">
             {budgets.map((item, id) => (

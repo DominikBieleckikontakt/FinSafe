@@ -54,6 +54,8 @@ export async function POST(req: Request) {
       },
     });
 
+    console.log("isTodaysbudget: " + isTodaysBudgetExist);
+
     if (isTodaysBudgetExist) {
       return NextResponse.json(
         {
@@ -71,6 +73,8 @@ export async function POST(req: Request) {
         userBudgetId: budget?.id,
       },
     });
+
+    console.log("new budget: " + newBudget);
 
     const todayBudget = {
       income: newBudget.income,
