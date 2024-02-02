@@ -29,6 +29,58 @@ export type LogInFormType = {
   password: string;
 };
 
+export type TodaysBudgetType = {
+  income: number;
+  outcome: number;
+};
+
+export type BudgetsType = {
+  income: number;
+  outcome: number;
+  createdAt: Date;
+};
+
+export type AllBudgetInfoType = {
+  income: number;
+  outcome: number;
+  createdAt: Date;
+  todaysBudget: number;
+  email?: string;
+};
+
+export type AddNew = {
+  getData: (budget: AllBudgetInfoType) => void;
+  email: string;
+};
+
+export type Options = {
+  method: string | null;
+  body: Object;
+};
+
+export type ChartElemetProps = {
+  type: string;
+  period: string;
+  email: string;
+};
+
+export type ChartProps = {
+  data: [
+    {
+      period: string;
+      todaysBudget: number;
+      createdAt: Date;
+      id: number;
+    }
+  ];
+  period: string;
+};
+
+export type SpecialBudgetType = {
+  data: AllBudgetInfoType;
+  email?: string;
+};
+
 declare module "next-auth" {
   interface User {
     name: string | null;
@@ -46,7 +98,7 @@ declare module "next-auth" {
   }
 }
 
-export type LogOutComponentProps = {
+export type ChildrenProp = {
   children: React.ReactNode;
 };
 

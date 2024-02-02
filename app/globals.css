@@ -18,3 +18,25 @@ input:-webkit-autofill:active {
   background-clip: text !important;
   -webkit-text-fill-color: white !important;
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #737373 #b0b0b0;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #b0b0b0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #737373;
+  border-radius: 8px;
+  border: 2px none #000000;
+}

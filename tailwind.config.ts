@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        appear: {
+          "0%": { opacity: "0", transform: "translateY(50%)" },
+          "100%": { opacity: "1", transform: "translateY(0%)" },
+        },
+      },
       colors: {
         primary: "#2FF736",
         "primary-darker": "#26c32b",
@@ -17,6 +23,7 @@ const config: Config = {
       },
       animation: {
         "spin-slow": "spin 120s linear infinite",
+        appear: "appear .5s ease-in-out",
       },
     },
   },
