@@ -16,7 +16,7 @@ export const fetchData = async (url: string, options?: Options) => {
   });
 
   if (!res.ok) {
-    throw new Error(`${res.status}`);
+    return res.status;
   }
 
   const data = await res.json();

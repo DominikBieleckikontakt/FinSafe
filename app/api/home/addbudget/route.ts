@@ -52,11 +52,16 @@ export async function POST(req: Request) {
       },
     });
 
-    const month = Number(Number(now.month) + 1);
+    const thisMonthPlusOne = Number(now.month) + 1;
+    let month: string;
+    month = thisMonthPlusOne < 10 ? `0${Number(now.month) + 1}` : now.month;
+
+    let day: string;
+    day = Number(now.day) < 10 ? `0${Number(now.day)}` : `${Number(now.day)}`;
 
     const isTodaysBudgetExist = await prisma.dailyBudget.findFirst({
       where: {
-        createdAt: new Date(`${now.year}-${month}-${now.day}`),
+        createdAt: new Date(`${now.year}-${month}-${day}`),
         userBudgetId: budget.id,
       },
     });

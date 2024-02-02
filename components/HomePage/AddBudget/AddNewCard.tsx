@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { MotionDiv } from "@/components";
 import { easeInOut } from "framer-motion";
 
+import { fetchData } from "@/lib/server-utils";
 import { now } from "@/constants";
 import { Button } from "@/components";
 import { AddNew } from "@/types";
@@ -37,26 +38,40 @@ const AddNewCard = ({ getData, email }: AddNew) => {
     e.preventDefault();
 
     setIsLoading(true);
-
-    const res = await fetch("/api/home/addbudget", {
+    const data = await fetchData("/api/home/addbudget", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+      body: {
         income,
         outcome,
         email,
-      }),
+      },
     });
 
-    if (res.status === 402) {
+    if (data.budget === null || data === 402) {
       setMessage("You already have today's budget. You can edit existing one");
+    } else {
+      getData(data.todayBudget);
     }
 
-    const data = await res.json();
+    // const res = await fetch("/api/home/addbudget", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     income,
+    //     outcome,
+    //     email,
+    //   }),
+    // });
 
-    getData(data.todayBudget);
+    // if (res.status === 402) {
+    //   setMessage("You already have today's budget. You can edit existing one");
+    // }
+
+    // const data = await res.json();
+
+    // getData(data.todayBudget);
 
     setIncome("");
     setOutcome("");

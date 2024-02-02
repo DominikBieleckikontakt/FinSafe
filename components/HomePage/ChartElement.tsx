@@ -7,6 +7,7 @@ import { fetchData } from "@/lib/server-utils";
 const ChartElement = ({ type, period, email }: ChartElemetProps) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(period);
 
   useEffect(() => {
     setIsLoading(true);
@@ -23,7 +24,6 @@ const ChartElement = ({ type, period, email }: ChartElemetProps) => {
       fetchedData !== null && setData(fetchedData.budgets);
       setIsLoading(false);
     });
-    setIsLoading(false);
   }, [period]);
 
   return (
