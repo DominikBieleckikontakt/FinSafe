@@ -17,29 +17,11 @@ export async function POST(req: Request) {
       },
     });
 
-    if (!user) {
-      return NextResponse.json(
-        { user: null, message: "User doesn't exists" },
-        { status: 401 }
-      );
-    }
-
     const budget = await prisma.userBudget.findUnique({
       where: {
         userId: user.id,
       },
     });
-
-    if (!budget) {
-      return NextResponse.json(
-        {
-          budget: null,
-          message:
-            "This user doesn't have a budget. Something gone wrong during registration.",
-        },
-        { status: 401 }
-      );
-    }
 
     const actualBudget = budget.budget + actualIncome - actualOutome;
 
