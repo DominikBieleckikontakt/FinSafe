@@ -28,8 +28,8 @@ export async function POST(req: Request) {
       where: {
         userBudgetId: userBudget.id,
         createdAt: {
-          gte: new Date(`${now.year}-${month}-01`),
-          lte: new Date(`${now.year}-${month}-31`),
+          gte: new Date(`${Number(now.year)}-${month}-01`),
+          lte: new Date(`${Number(now.year)}-${month}-31`),
         },
       },
     });

@@ -22,8 +22,8 @@ export async function POST(req: Request) {
       where: {
         userBudgetId: userBudget.id,
         createdAt: {
-          gte: new Date(`${now.year}-01-01`),
-          lte: new Date(`${now.year}-12-31`),
+          gte: new Date(`${Number(now.year)}-01-01`),
+          lte: new Date(`${Number(now.year)}-12-31`),
         },
       },
     });

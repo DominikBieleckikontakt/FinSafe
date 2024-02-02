@@ -8,8 +8,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { income, outcome, email } = body;
 
-    console.log("email: " + email);
-
     const actualIncome = Number(income);
     const actualOutome = Number(outcome);
 
@@ -19,15 +17,11 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log("user: " + user.name);
-
     const budget = await prisma.userBudget.findUnique({
       where: {
         userId: user.id,
       },
     });
-
-    console.log("budget: " + user.name);
 
     const actualBudget = budget.budget + actualIncome - actualOutome;
 
@@ -56,8 +50,6 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log("isTodaysbudget: " + isTodaysBudgetExist);
-
     if (isTodaysBudgetExist) {
       return NextResponse.json(
         {
@@ -75,8 +67,6 @@ export async function POST(req: Request) {
         userBudgetId: budget?.id,
       },
     });
-
-    console.log("new budget: " + newBudget);
 
     const todayBudget = {
       income: newBudget.income,
