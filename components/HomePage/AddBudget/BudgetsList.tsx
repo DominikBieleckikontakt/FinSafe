@@ -84,8 +84,8 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
     );
     if (filteredBudgets.length === 0) {
       setIsBudgets(false);
-      setBudgets(filteredBudgets);
     }
+    setBudgets(filteredBudgets);
 
     toast.success("Deleted", {
       style: {
