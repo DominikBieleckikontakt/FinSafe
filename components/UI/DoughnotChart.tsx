@@ -19,13 +19,13 @@ const DoughnotChart = ({ data, period }: ChartProps) => {
           data={userData}
           options={{
             responsive: true,
-            plugins: {
-              title: {
-                text: "Your budget",
-                display: true,
-                color: "#FFFFFF",
-              },
-            },
+            // plugins: {
+            //   title: {
+            //     text: "Your budget",
+            //     display: true,
+            //     color: "#FFFFFF",
+            //   },
+            // },
             maintainAspectRatio: false,
             datasets: {
               doughnut: {
