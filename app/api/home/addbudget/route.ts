@@ -1,21 +1,19 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+
 import { now } from "@/constants";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { income, outcome } = body;
-    const session = await getServerSession(authOptions);
+    const { income, outcome, email } = body;
 
     const actualIncome = Number(income);
     const actualOutome = Number(outcome);
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session?.user.email,
+        email,
       },
     });
 
@@ -54,9 +52,11 @@ export async function POST(req: Request) {
       },
     });
 
+    const month = Number(Number(now.month) + 1);
+
     const isTodaysBudgetExist = await prisma.dailyBudget.findFirst({
       where: {
-        createdAt: new Date(`${now.year}-${now.month + 1}-${now.day}`),
+        createdAt: new Date(`${now.year}-${month}-${now.day}`),
         userBudgetId: budget.id,
       },
     });

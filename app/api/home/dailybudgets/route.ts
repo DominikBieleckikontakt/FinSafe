@@ -1,17 +1,13 @@
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
-
-    const { limit } = await req.json();
+    const { limit, email } = await req.json();
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session?.user.email,
+        email,
       },
     });
 

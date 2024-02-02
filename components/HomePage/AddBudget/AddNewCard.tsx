@@ -18,14 +18,20 @@ const variants = {
   },
 };
 
-const AddNewCard = ({ getData }: AddNew) => {
+const AddNewCard = ({ getData, email }: AddNew) => {
   const [income, setIncome] = useState<string>("");
   const [outcome, setOutcome] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
+  const thisMonth = Number(now.month);
+  const thisMonthPlusOne = thisMonth + 1;
+
   let month: string;
-  month = Number(now.month + 1) < 10 ? `0${Number(now.month) + 1}` : now.month;
+  month = thisMonthPlusOne < 10 ? `0${Number(now.month) + 1}` : now.month;
+
+  let day: string;
+  day = Number(now.day) < 10 ? `0${now.day}` : now.day;
 
   const sendData = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +46,7 @@ const AddNewCard = ({ getData }: AddNew) => {
       body: JSON.stringify({
         income,
         outcome,
+        email,
       }),
     });
 
@@ -73,7 +80,7 @@ const AddNewCard = ({ getData }: AddNew) => {
       <p className="text-sm text-zinc-400">
         Date:{" "}
         <b className="italic">
-          {now.year}-{month}-{now.day}
+          {now.year}-{month}-{day}
         </b>
       </p>
       <div className="mt-5">

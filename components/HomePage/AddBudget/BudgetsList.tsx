@@ -1,34 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { easeInOut, motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 
 import { BudgetElement, LoadMore } from "../../";
-import { AllBudgetInfoType } from "@/types";
-import { MotionDiv } from "../../";
+import { AllBudgetInfoType, SpecialBudgetType } from "@/types";
 import { fetchData } from "@/lib/server-utils";
 
-type SpecialBudgetType = {
-  data: AllBudgetInfoType;
-};
-
-const variants = {
-  hidden: {
-    opacity: 0,
-    y: "50%",
-  },
-  visible: {
-    opacity: 1,
-    y: "0%",
-  },
-};
-
-const BudgetsList = ({ data }: SpecialBudgetType) => {
+const BudgetsList = ({ data, email }: SpecialBudgetType) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>([]);
-  const [message, setMessage] = useState<string>(
-    "You don't have budget history or something gone wrong"
-  );
+
+  const message = "You don't have budget history or something gone wrong";
 
   // Adding new data to the list
   useEffect(() => {
@@ -77,22 +59,17 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
         method: "POST",
         body: {
           limit: 0,
+          email,
         },
       });
     };
 
     getData().then((fetchedData) => {
       if (fetchedData.budgets !== null) {
-        // if (budgets?.length > 0) {
-        //   setBudgets((prevState) => [...prevState, ...fetchedData.budgets]);
-        // } else {
-        //   setBudgets([...fetchedData.budgets]);
-        // }
         setBudgets([...fetchedData.budgets]);
       }
+      setIsLoading(false);
     });
-
-    setIsLoading(false);
   }, []);
 
   const onDeleteHandler = async (createdAt: Date) => {
@@ -117,6 +94,7 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
       method: "POST",
       body: {
         createdAt,
+        email,
       },
     });
   };
@@ -139,32 +117,25 @@ const BudgetsList = ({ data }: SpecialBudgetType) => {
             <p className="text-white mb-10 mt-1">We are loading your data...</p>
           </div>
         )}
-        {!isLoading && (budgets?.length === 0 || budgets === null) && (
-          <p className="text-white text-center font-bold text-xl">{message}</p>
-        )}
+        {!isLoading &&
+          (budgets.length === 0 ||
+            (budgets === null && (
+              <p className="text-white text-center font-bold text-xl">
+                {message}
+              </p>
+            )))}
         {budgets?.length > 0 && !isLoading && (
-          <MotionDiv
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            transition={{
-              delay: 0.1,
-              ease: easeInOut,
-              duration: 0.8,
-            }}
-            viewport={{ amount: 0 }}
-          >
-            <ul className="list-none -mb-10">
-              {budgets.map((item, id) => (
-                <BudgetElement
-                  key={id}
-                  budget={item}
-                  onDelete={onDeleteHandler}
-                  onEdit={onEditCardHandler}
-                />
-              ))}
-            </ul>
-          </MotionDiv>
+          <ul className="list-none -mb-10">
+            {budgets.map((item, id) => (
+              <BudgetElement
+                key={id}
+                budget={item}
+                onDelete={onDeleteHandler}
+                onEdit={onEditCardHandler}
+                email={email}
+              />
+            ))}
+          </ul>
         )}
         {budgets?.length >= 8 && (
           <LoadMore onDelete={onDeleteHandler} onEdit={onEditCardHandler} />

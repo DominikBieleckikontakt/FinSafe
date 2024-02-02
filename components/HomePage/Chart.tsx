@@ -1,25 +1,25 @@
 "use client";
-import { fetchData } from "@/lib/server-utils";
 import React, { ChangeEvent, useState } from "react";
+import { ChartElement } from "..";
 
-import { now, months } from "@/constants";
+const Chart: React.FC<{ email: string }> = ({ email }) => {
+  const [selectedDate, setSelectedDate] = useState("month");
+  const [chart, setChart] = useState("line");
 
-const Chart = () => {
-  const [data, setData] = useState();
-  const [date, setDate] = useState();
-  const [selectedDate, setSelectedDate] = useState("week");
-
-  // const budget = fetchData("", {
-  //   method: "POST",
-  //   body: {},
-  // });
-
-  const onSelectChangeHandler = (e: ChangeEvent) => {
+  const onSelectPeriodChangeHandler = (e: ChangeEvent) => {
     const element = e.currentTarget as HTMLSelectElement;
     const value = element.value;
 
-    const selected = value;
-    setSelectedDate(selected);
+    const selectedPeriod = value;
+    setSelectedDate(selectedPeriod);
+  };
+
+  const toggleChart = (e: ChangeEvent) => {
+    const element = e.currentTarget as HTMLSelectElement;
+    const value = element.value;
+
+    const selectedChart = value;
+    selectedChart === "doughnut" ? setChart("doughnut") : setChart("line");
   };
 
   return (
@@ -27,16 +27,24 @@ const Chart = () => {
       <div>
         <div className="w-full flex justify-end">
           <select
-            onChange={onSelectChangeHandler}
+            onChange={onSelectPeriodChangeHandler}
             value={selectedDate}
-            className="bg-background p-2 rounded-lg font-light outline-none"
+            className="bg-background p-2 rounded-lg font-light outline-none mx-5"
           >
-            <option value="week">Week</option>
+            {/* <option value="week">Week</option> */}
             <option value="month">Month</option>
             <option value="year">Year</option>
           </select>
+          <select
+            onChange={toggleChart}
+            value={chart}
+            className="bg-background p-2 rounded-lg font-light outline-none"
+          >
+            <option value="line">Line</option>
+            <option value="doughnut">Doughnut</option>
+          </select>
         </div>
-        <div>Chart</div>
+        <ChartElement type={chart} period={selectedDate} email={email} />
       </div>
     </>
   );

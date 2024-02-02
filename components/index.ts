@@ -11,7 +11,7 @@ import { Checkbox } from "./UI/checkbox";
 import FirstBudgetForm from "./FirstBudgetPage/FirstBudgetForm";
 import MainCard from "./HomePage/MainCard";
 import Chart from "./HomePage/Chart";
-import BarChart from "./UI/BarChart";
+import DoughnotChart from "./UI/DoughnotChart";
 import LineChart from "./UI/LineChart";
 import SideAddCard from "./HomePage/SideAddCard";
 import TodaysBudgetSummary from "./HomePage/TodaysBudgetSummary";
@@ -24,6 +24,7 @@ import LoadMore from "./HomePage/AddBudget/LoadMore";
 import { MotionDiv } from "./UI/MotionDiv";
 import ViewBudgetCard from "./HomePage/AddBudget/ViewBudgetCard";
 import EditBudgetCard from "./HomePage/AddBudget/EditBudgetCard";
+import ChartElement from "./HomePage/ChartElement";
 
 export {
   MainPage,
@@ -39,7 +40,7 @@ export {
   FirstBudgetForm,
   MainCard,
   Chart,
-  BarChart,
+  DoughnotChart,
   LineChart,
   SideAddCard,
   TodaysBudgetSummary,
@@ -52,4 +53,5 @@ export {
   MotionDiv,
   ViewBudgetCard,
   EditBudgetCard,
+  ChartElement,
 };

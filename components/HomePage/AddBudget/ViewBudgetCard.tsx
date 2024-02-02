@@ -9,6 +9,11 @@ const ViewBudgetCard: React.FC<{
   onChangeMode: () => void;
   onDelete: (date: Date) => void;
 }> = ({ todaysBudget, date, budget, onChangeMode, onDelete }) => {
+  let day = date.day;
+  if (Number(date.day) < 10) {
+    day = `0${date.day}`;
+  }
+
   const changeModeHandler = () => {
     onChangeMode();
   };
@@ -21,7 +26,7 @@ const ViewBudgetCard: React.FC<{
     <div className="flex max-sm:flex-col sm:justify-between w-full">
       <div>
         <h3 className="text-xl font-bold text-primary-darker">
-          {date.day} {date.month} {date.year}
+          {day} {date.month} {date.year}
         </h3>
         <div className="ml-1">
           <p className="my-2">

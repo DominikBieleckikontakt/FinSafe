@@ -105,7 +105,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
             {isTodaysBudget ? (
               <TodaysBudgetSummary todaysBudget={todaysBudget} />
             ) : (
-              <div className="text-white sm:flex mb-5 text-xl font-light">
+              <div className="text-white sm:flex mb-5 text-lg font-light">
                 <p>
                   You didn't added today's budget. Maybe you want to do that?
                 </p>
@@ -114,14 +114,14 @@ const MainCard = ({ user }: HomeMainCardProps) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="md:grid md:grid-cols-subgrid md:row-span-2 md:col-span-2 text-white">
-                <Chart />
+                <Chart email={user.email} />
               </div>
-              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700">
-                <SideAddCard />
+              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700 md:grid md:grid-cols-subgrid md:row-span-2">
+                <SideAddCard email={user.email} />
               </div>
-              <div className="text-white bg-red-500">
-                {/* SIDE CARD II */}sdsd
-              </div>
+              {/*<div className="text-white bg-red-500">
+                sdsd
+              </div>*/}
             </div>
           </MotionDiv>
         )}

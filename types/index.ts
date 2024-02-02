@@ -45,15 +45,40 @@ export type AllBudgetInfoType = {
   outcome: number;
   createdAt: Date;
   todaysBudget: number;
+  email?: string;
 };
 
 export type AddNew = {
   getData: (budget: AllBudgetInfoType) => void;
+  email: string;
 };
 
 export type Options = {
   method: string | null;
   body: Object;
+};
+
+export type ChartElemetProps = {
+  type: string;
+  period: string;
+  email: string;
+};
+
+export type ChartProps = {
+  data: [
+    {
+      period: string;
+      todaysBudget: number;
+      createdAt: Date;
+      id: number;
+    }
+  ];
+  period: string;
+};
+
+export type SpecialBudgetType = {
+  data: AllBudgetInfoType;
+  email?: string;
 };
 
 declare module "next-auth" {

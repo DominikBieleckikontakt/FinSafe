@@ -21,10 +21,12 @@ const variants = {
 
 const BudgetElement: React.FC<{
   budget: AllBudgetInfoType;
+  email: string;
   onDelete: (date: Date) => void;
   onEdit: () => void;
-}> = ({ budget, onDelete, onEdit }) => {
+}> = ({ budget, onDelete, onEdit, email }) => {
   const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
+
   const { createdAt } = budget;
 
   const date = {
@@ -54,7 +56,6 @@ const BudgetElement: React.FC<{
     budget.todaysBudget = overallBudget;
     budget.createdAt = createdAt;
 
-    //TO DO: SENDING DATA FROM newData TO DB
     await fetchData("/api/home/editbudget", {
       method: "POST",
       body: {
@@ -62,6 +63,7 @@ const BudgetElement: React.FC<{
         income: updatedIncome,
         outcome: updatedOutcome,
         createdAt: budget.createdAt,
+        email,
       },
     });
 
@@ -75,13 +77,15 @@ const BudgetElement: React.FC<{
       animate="visible"
       exit="hidden"
       transition={{
-        delay: 0.5,
+        delay: 0,
         ease: easeInOut,
         duration: 0.8,
       }}
       viewport={{ once: true }}
     >
-      <div className="w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10 flex justify-between">
+      <div
+        className={`w-full bg-background-lighter text-white rounded-lg p-5 shadow-lg my-10 flex justify-between`}
+      >
         {!isEditingMode && (
           <ViewBudgetCard
             budget={budget}

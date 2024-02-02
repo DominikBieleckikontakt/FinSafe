@@ -2,7 +2,7 @@
 import { Options } from "@/types";
 import { headers } from "next/headers";
 
-export const fetchData = async (url: string, options: Options) => {
+export const fetchData = async (url: string, options?: Options) => {
   const headersList = headers();
   const cookie = headersList.get("cookie");
 
