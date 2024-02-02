@@ -42,7 +42,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
         email: user.email,
       },
     }).then((fetchedData) => {
-      if (fetchedData !== null) {
+      if (fetchedData !== null && fetchedData?.status === 201) {
         setIsTodaysBudget(true);
         setTodaysBudget({
           income: fetchedData.today?.income,
