@@ -23,6 +23,7 @@ const ChartElement = ({ type, period, email }: ChartElemetProps) => {
       fetchedData !== null && setData(fetchedData.budgets);
       setIsLoading(false);
     });
+    setIsLoading(false);
   }, [period]);
 
   return (

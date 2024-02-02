@@ -70,6 +70,7 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
       }
       setIsLoading(false);
     });
+    setIsLoading(false);
   }, []);
 
   const onDeleteHandler = async (createdAt: Date) => {
