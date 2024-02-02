@@ -52,7 +52,7 @@ const EditBudgetCard: React.FC<{
         <div className="text-right">
           <Button
             text=""
-            className="shadow-xl py-3 p-1 pl-3 rounded-lg bg-zinc-700 hover:bg-zinc-600 hover:scale-105 duration-300"
+            className="shadow-xl py-3 p-1 pl-3 pr-3 md:pr-1 rounded-lg bg-zinc-700 hover:bg-zinc-600 hover:scale-105 duration-300"
             width={24}
             height={24}
             image="/icons/check.svg"

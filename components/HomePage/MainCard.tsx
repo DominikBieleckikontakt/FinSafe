@@ -106,7 +106,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
               <div className="md:grid md:grid-cols-subgrid md:row-span-2 md:col-span-2 text-white">
                 <Chart email={user.email} />
               </div>
-              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700 md:grid md:grid-cols-subgrid md:row-span-2">
+              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700 md:grid md:grid-cols-subgrid md:row-span-1">
                 <SideAddCard email={user.email} />
               </div>
               {/*<div className="text-white bg-red-500">

@@ -13,13 +13,15 @@ const LineChart = ({ data, period }: ChartProps) => {
   }, []);
 
   return (
-    <div>
+    <div className="max-sm:h-96 h-96">
       {userData !== null && (
         <Line
           data={userData}
           options={{
+            responsive: true,
             borderColor: "#2FF736",
             backgroundColor: "#2FF736",
+            maintainAspectRatio: false,
           }}
         />
       )}

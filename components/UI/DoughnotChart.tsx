@@ -13,14 +13,23 @@ const DoughnotChart = ({ data, period }: ChartProps) => {
   }, []);
 
   return (
-    <div>
+    <div className="max-sm:h-96 h-96">
       {userData !== null && (
         <Doughnut
           data={userData}
           options={{
             responsive: true,
+            plugins: {
+              title: {
+                text: "Your budget",
+                display: true,
+                color: "#FFFFFF",
+              },
+            },
+            maintainAspectRatio: false,
             datasets: {
               doughnut: {
+                label: "Your budget",
                 borderRadius: 5,
                 backgroundColor: [
                   "#5cb85c",

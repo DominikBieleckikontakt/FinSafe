@@ -25,7 +25,7 @@ const Chart: React.FC<{ email: string }> = ({ email }) => {
   return (
     <>
       <div>
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-center sm:justify-end">
           <select
             onChange={onSelectPeriodChangeHandler}
             value={selectedDate}
