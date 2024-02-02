@@ -10,7 +10,8 @@ let skip: number = 8;
 const LoadMore: React.FC<{
   onDelete: (date: Date) => void;
   onEdit: () => void;
-}> = ({ onDelete, onEdit }) => {
+  email: string;
+}> = ({ onDelete, onEdit, email }) => {
   const [data, setData] = useState<AllBudgetInfoType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -55,6 +56,7 @@ const LoadMore: React.FC<{
             onEdit={onEdit}
             key={id}
             budget={item}
+            email={email}
           />
         ))}
       </ul>
