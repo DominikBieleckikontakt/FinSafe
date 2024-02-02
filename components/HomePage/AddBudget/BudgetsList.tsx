@@ -8,6 +8,7 @@ import { fetchData } from "@/lib/server-utils";
 
 const BudgetsList = ({ data, email }: SpecialBudgetType) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isBudgets, setIsBudgets] = useState(true);
   const [budgets, setBudgets] = useState<AllBudgetInfoType[] | null>([]);
 
   const message = "You don't have budget history or something gone wrong";
@@ -68,6 +69,9 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
       if (fetchedData.budgets !== null) {
         setBudgets([...fetchedData.budgets]);
       }
+      if (fetchedData === 403) {
+        setIsBudgets(false);
+      }
       setIsLoading(false);
     });
     setIsLoading(false);
@@ -119,6 +123,7 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
           </div>
         )}
         {!isLoading &&
+          !isBudgets &&
           (budgets.length === 0 ||
             (budgets === null && (
               <p className="text-white text-center font-bold text-xl">
