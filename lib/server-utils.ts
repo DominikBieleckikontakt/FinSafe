@@ -6,8 +6,6 @@ export const fetchData = async (url: string, options?: Options) => {
   const headersList = headers();
   const cookie = headersList.get("cookie");
 
-  console.log(process.env.URL);
-  console.log(url);
   const res = await fetch(`${process.env.URL}${url}`, {
     method: options.method,
     headers: {

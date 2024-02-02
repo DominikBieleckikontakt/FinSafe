@@ -4,6 +4,7 @@ import { easeInOut } from "framer-motion";
 
 import { HomeMainCardProps, TodaysBudgetType } from "@/types";
 import { Chart, SideAddCard, TodaysBudgetSummary, MotionDiv } from "..";
+import { fetchData } from "@/lib/server-utils";
 
 const variants = {
   hidden: {
@@ -35,34 +36,50 @@ const MainCard = ({ user }: HomeMainCardProps) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("/api/home", {
+    fetchData("/api/home", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+      body: {
         email: user.email,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          setIsTodaysBudget(true);
-        }
-        if (res.status === 202) {
-          setIsTodaysBudget(false);
-        }
-        return res.json();
-      })
-      .then((data) => {
+      },
+    }).then((fetchedData) => {
+      if (fetchedData !== null) {
+        setIsTodaysBudget(true);
         setTodaysBudget({
-          income: data.today?.income,
-          outcome: data.today?.outcome,
+          income: fetchedData.today?.income,
+          outcome: fetchedData.today?.outcome,
         });
-        if (data.today === null) {
-          setIsTodaysBudget(false);
-        }
-        setIsLoading(false);
-      });
+      } else {
+        setIsTodaysBudget(false);
+      }
+    });
+    setIsLoading(false);
+    // fetch(`/api/home`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: user.email,
+    //   }),
+    // })
+    //   .then((res) => {
+    //     if (res.status === 201) {
+    //       setIsTodaysBudget(true);
+    //     }
+    //     if (res.status === 202) {
+    //       setIsTodaysBudget(false);
+    //     }
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     setTodaysBudget({
+    //       income: data.today?.income,
+    //       outcome: data.today?.outcome,
+    //     });
+    // if (data.today === null) {
+    //   setIsTodaysBudget(false);
+    // }
+    // });
   }, []);
 
   return (
