@@ -3,7 +3,6 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "./prisma";
 import { compare } from "bcrypt";
-import { encode, decode } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
 
@@ -13,7 +12,6 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  jwt: { encode, decode },
   pages: {
     signIn: "/login",
     signOut: "/",
@@ -32,10 +30,6 @@ export const authOptions: NextAuthOptions = {
           placeholder: "john@example.com",
         },
         password: { label: "Password", type: "password" },
-        // rememberMe: {
-        //   label: "Remember me",
-        //   type: "checkbox",
-        // },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {

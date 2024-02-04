@@ -137,7 +137,7 @@ const BudgetsList = ({ data, email }: SpecialBudgetType) => {
             ))}
           </ul>
         )}
-        {budgets?.length >= 8 && (
+        {budgets?.length >= 6 && (
           <LoadMore
             onDelete={onDeleteHandler}
             onEdit={onEditCardHandler}

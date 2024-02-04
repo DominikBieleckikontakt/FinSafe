@@ -33,6 +33,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
     income: 0,
     outcome: 0,
   });
+  const [allBudget, setAllBudget] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,6 +49,7 @@ const MainCard = ({ user }: HomeMainCardProps) => {
           income: fetchedData.today?.income,
           outcome: fetchedData.today?.outcome,
         });
+        setAllBudget(fetchedData.allBudget);
       } else {
         setIsTodaysBudget(false);
       }
@@ -102,16 +104,13 @@ const MainCard = ({ user }: HomeMainCardProps) => {
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-6">
               <div className="md:grid md:grid-cols-subgrid md:row-span-2 md:col-span-2 text-white">
-                <Chart email={user.email} />
+                <Chart email={user.email} allBudget={allBudget} />
               </div>
-              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700 md:grid md:grid-cols-subgrid md:row-span-1">
+              <div className="rounded-lg bg-gradient-to-r from-slate-600 to-slate-700 md:grid md:grid-cols-subgrid md:row-span-1 max-lg:my-3">
                 <SideAddCard email={user.email} />
               </div>
-              {/*<div className="text-white bg-red-500">
-                sdsd
-              </div>*/}
             </div>
           </MotionDiv>
         )}

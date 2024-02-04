@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 
@@ -11,12 +10,11 @@ const LogInGoogleButton = ({ disabled }: LogInGoogleButtonProps) => {
   const loginHandler = async () => {
     try {
       setIsLoading(true);
-      signIn("google", {
+      await signIn("google", {
         callbackUrl: "http://localhost:3000/home",
       });
     } catch (err) {
       setIsLoading(false);
-      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -42,10 +40,10 @@ const LogInGoogleButton = ({ disabled }: LogInGoogleButtonProps) => {
           image="/icons/google.svg"
           alt="google icon"
           onClick={loginHandler}
-          className="p-3 mx-5 text-center rounded-lg flex text-white text-lg items-center w-full bg-[#222222] hover:bg-[#446eb1] duration-300"
+          className="p-3 mx-5 line-through text-center rounded-lg flex text-white text-lg items-center w-full bg-[#222222] duration-300"
           width={24}
           height={24}
-          disabled={disabled}
+          disabled={true}
           loader={false}
         />
       )}

@@ -74,7 +74,12 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json(
-      { message: "Request responded", today: todaysBudget, status: 201 },
+      {
+        message: "Request responded",
+        today: todaysBudget,
+        status: 201,
+        allBudget: budget.budget,
+      },
       { status: 201 }
     );
   } catch (error) {
