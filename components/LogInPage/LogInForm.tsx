@@ -6,7 +6,6 @@ import { signIn } from "next-auth/react";
 import { Button, Checkbox } from "..";
 import { LogInFormType } from "@/types";
 import { LoadingElement } from "..";
-import LogInGoogleButton from "./LogInGoogleButton";
 
 const LogInForm = () => {
   const router = useRouter();
@@ -97,21 +96,6 @@ const LogInForm = () => {
                 }
               />
             </div>
-            {/* <div className="flex items-center space-x-2 p-5 pb-3">
-              <Checkbox
-                onCheckedChange={() => {
-                  setKeep((prev) => !prev);
-                  console.log(keep);
-                }}
-                id="keep"
-              />
-              <label
-                htmlFor="keep"
-                className="font-light leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white"
-              >
-                Remember me
-              </label>
-            </div> */}
             {!isValid && (
               <div className="text-red-600 font-bold pl-5">{message}</div>
             )}
@@ -129,14 +113,6 @@ const LogInForm = () => {
               />
             </div>
           </form>
-          <div className="flex items-center mb-3 md:px-16">
-            <div className="h-[2px] rounded-xl w-full bg-slate-600 ml-5"></div>
-            <p className="px-3 text-slate-300">OR</p>
-            <div className="h-[2px] rounded-xl w-full bg-slate-600 mr-5"></div>
-          </div>
-          <div className="md:px-16 pb-6 pt-3 w-full justify-center flex">
-            <LogInGoogleButton disabled={isLoading} />
-          </div>
         </div>
       )}
     </>

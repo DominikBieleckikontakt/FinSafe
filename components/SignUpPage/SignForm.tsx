@@ -1,7 +1,6 @@
 "use client";
 import { validateSignUpForm } from "@/lib/utils";
 import { SignUpForm } from "@/types";
-import LogInGoogleButton from "../LogInPage/LogInGoogleButton";
 import { Button } from "..";
 
 import React, { useState } from "react";
@@ -175,14 +174,6 @@ const SignForm = () => {
           />
         </div>
       </form>
-      <div className="flex items-center mb-3 md:px-16">
-        <div className="h-[2px] rounded-xl w-full bg-slate-600 ml-5"></div>
-        <p className="px-3 text-slate-300">OR</p>
-        <div className="h-[2px] rounded-xl w-full bg-slate-600 mr-5"></div>
-      </div>
-      <div className="md:px-16 pb-6 pt-3 w-full justify-center flex">
-        <LogInGoogleButton disabled={isLoading} />
-      </div>
     </div>
   );
 };
