@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Budget Manager Web App
 
-## Getting Started
+Welcome to the Budget Manager Web App repository! This web application is designed to help users manage their budgets efficiently. Whether you're looking to track your monthly expenses, set yearly financial goals, or simply monitor your daily spending, this app has got you covered.
 
-First, run the development server:
+# Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# User Account Management
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Account Creation: Users can sign up using their email to create an account securely.
+- Authentication: Robust authentication system to ensure user data privacy and security.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Budget Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Yearly and Monthly Charts: Visualize your financial trends with interactive charts that display your yearly and monthly budgets at a glance.
 
-## Learn More
+# Daily Budget Tracking
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Add Expenses: Easily add your daily expenses to keep track of where your money is going.
+- Edit Expenses: Make adjustments to your budget entries as needed to reflect accurate spending information.
+- Delete Expenses: Remove unwanted or outdated entries to maintain an organized and up-to-date budget.
