@@ -30,6 +30,9 @@ const LoadMore: React.FC<{
     if (budgets?.length > 0) {
       data?.length > 0 && setData((prevState) => [...prevState, ...budgets]);
       data?.length === 0 && setData([...budgets]);
+      if (budgets.length < 6) {
+        setMessage("You don't have any other budgets.");
+      }
       skip += 6;
     } else {
       setMessage("You don't have any other budgets.");
