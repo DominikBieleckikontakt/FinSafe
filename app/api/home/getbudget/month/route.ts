@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { now } from "@/constants";
 import { NextResponse } from "next/server";
+import { numDays } from "@/lib/utils";
 
 export async function POST(req: Request) {
   try {
@@ -25,11 +26,19 @@ export async function POST(req: Request) {
     month = thisMonthPlusOne < 10 ? `0${Number(now.month) + 1}` : now.month;
 
     const fetchedBudgets = await prisma.dailyBudget.findMany({
+      orderBy: {
+        createdAt: "asc",
+      },
       where: {
         userBudgetId: userBudget.id,
         createdAt: {
           gte: new Date(`${Number(now.year)}-${month}-01`),
-          lte: new Date(`${Number(now.year)}-${month}-31`),
+          lte: new Date(
+            `${Number(now.year)}-${month}-${numDays(
+              Number(now.year),
+              Number(Number(now.month) + 1)
+            )}`
+          ),
         },
       },
     });
@@ -40,7 +49,7 @@ export async function POST(req: Request) {
       return {
         id,
         createdAt: item.createdAt,
-        todaysBudget: item.todaysBudget,
+        todaysBudget: item.income - item.outcome,
         period: month,
       };
     });

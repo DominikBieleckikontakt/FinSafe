@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChartElemetProps } from "@/types";
-import { DoughnotChart, LineChart } from "..";
+import { BarChart, LineChart } from "..";
 import { fetchData } from "@/lib/server-utils";
 
 const ChartElement = ({ type, period, email }: ChartElemetProps) => {
@@ -39,8 +39,8 @@ const ChartElement = ({ type, period, email }: ChartElemetProps) => {
       )}
       {!isLoading &&
         data !== null &&
-        (type === "doughnut" ? (
-          <DoughnotChart data={data} period={period} />
+        (type === "bar" ? (
+          <BarChart data={data} period={period} />
         ) : (
           <LineChart data={data} period={period} />
         ))}

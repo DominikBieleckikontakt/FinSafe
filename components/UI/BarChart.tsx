@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 
-// import { LineChart as Line } from "@mui/x-charts/LineChart";
 import { changePeriodOfChart } from "@/lib/utils";
 import { ChartProps } from "@/types";
+import { listOfColors } from "@/constants";
 
-const LineChart = ({ data, period }: ChartProps) => {
+const BarChart = ({ data, period }: ChartProps) => {
   const [userData, setUserData] = useState(null);
   useEffect(() => {
     changePeriodOfChart(period, data, setUserData);
@@ -16,9 +16,10 @@ const LineChart = ({ data, period }: ChartProps) => {
   return (
     <div className="max-sm:h-96 h-96">
       {userData !== null && (
-        <Line
+        <Bar
           data={userData}
           options={{
+            responsive: true,
             scales: {
               y: {
                 ticks: {
@@ -30,14 +31,16 @@ const LineChart = ({ data, period }: ChartProps) => {
             },
             plugins: {
               legend: {
-                display: false,
+                display: true,
               },
             },
-            spanGaps: true,
-            responsive: true,
-            borderColor: "#2FF736",
-            backgroundColor: "#2FF736",
             maintainAspectRatio: false,
+            datasets: {
+              bar: {
+                label: "Your budget",
+                backgroundColor: listOfColors,
+              },
+            },
           }}
         />
       )}
@@ -51,4 +54,4 @@ const LineChart = ({ data, period }: ChartProps) => {
   );
 };
 
-export default LineChart;
+export default BarChart;

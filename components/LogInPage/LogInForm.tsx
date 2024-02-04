@@ -27,7 +27,6 @@ const LogInForm = () => {
     const logInData = await signIn("credentials", {
       email: form.email,
       password: form.password,
-      rememberMe: keep,
       redirect: false,
     });
 
@@ -98,7 +97,7 @@ const LogInForm = () => {
                 }
               />
             </div>
-            <div className="flex items-center space-x-2 p-5 pb-3">
+            {/* <div className="flex items-center space-x-2 p-5 pb-3">
               <Checkbox
                 onCheckedChange={() => {
                   setKeep((prev) => !prev);
@@ -112,7 +111,7 @@ const LogInForm = () => {
               >
                 Remember me
               </label>
-            </div>
+            </div> */}
             {!isValid && (
               <div className="text-red-600 font-bold pl-5">{message}</div>
             )}

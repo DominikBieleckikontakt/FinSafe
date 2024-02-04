@@ -80,62 +80,86 @@ export const getMonths = (
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 0)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 1)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 2)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 3)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 4)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 5)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 6)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 7)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 8)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 9)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 10)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
     {
       data: dataToFilter
         .filter((item) => new Date(item.createdAt).getMonth() === 11)
-        .slice(-1)[0],
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.budget;
+        }, 0),
     },
   ];
 };
@@ -159,12 +183,19 @@ export const changePeriodOfChart = (
       { length: numDays(year, month) },
       (_, i) => i + 1
     );
+
     setUserData({
       labels: numOfDays.map((item) => item),
       datasets: [
         {
-          label: "Your budget",
-          data: data.map((budget) => budget.todaysBudget),
+          label: `Your incomes (${namedMonths[new Date().getMonth()]})`,
+          data: numOfDays.map((day) => {
+            for (let i = 0; i < numOfDays.length - 1; i++) {
+              if (new Date(data[i]?.createdAt).getDate() === day) {
+                return data[i].todaysBudget;
+              }
+            }
+          }),
         },
       ],
     });
@@ -181,10 +212,10 @@ export const changePeriodOfChart = (
       labels: namedMonths.map((item) => item),
       datasets: [
         {
-          label: "Your budget",
+          label: `Your incomes (${new Date().getFullYear()})`,
           data: months.map((budget) => {
-            if (budget.data?.budget !== undefined) {
-              return budget.data?.budget;
+            if (budget.data !== undefined) {
+              return budget.data;
             } else {
               return null;
             }

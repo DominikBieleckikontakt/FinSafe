@@ -11,7 +11,7 @@ import { Checkbox } from "./UI/checkbox";
 import FirstBudgetForm from "./FirstBudgetPage/FirstBudgetForm";
 import MainCard from "./HomePage/MainCard";
 import Chart from "./HomePage/Chart";
-import DoughnotChart from "./UI/DoughnotChart";
+import BarChart from "./UI/BarChart";
 import LineChart from "./UI/LineChart";
 import SideAddCard from "./HomePage/SideAddCard";
 import TodaysBudgetSummary from "./HomePage/TodaysBudgetSummary";
@@ -40,7 +40,7 @@ export {
   FirstBudgetForm,
   MainCard,
   Chart,
-  DoughnotChart,
+  BarChart,
   LineChart,
   SideAddCard,
   TodaysBudgetSummary,

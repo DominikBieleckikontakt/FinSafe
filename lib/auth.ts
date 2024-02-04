@@ -32,10 +32,10 @@ export const authOptions: NextAuthOptions = {
           placeholder: "john@example.com",
         },
         password: { label: "Password", type: "password" },
-        rememberMe: {
-          label: "Remember me",
-          type: "checkbox",
-        },
+        // rememberMe: {
+        //   label: "Remember me",
+        //   type: "checkbox",
+        // },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {

@@ -19,6 +19,9 @@ export async function POST(req: Request) {
     });
 
     const fetchedBudgets = await prisma.dailyBudget.findMany({
+      orderBy: {
+        createdAt: "asc",
+      },
       where: {
         userBudgetId: userBudget.id,
         createdAt: {
@@ -28,6 +31,7 @@ export async function POST(req: Request) {
       },
     });
 
+    // BUDGET OF EVERY MONTH SHOULD BE ADDED, LATER SENT
     const budgets = fetchedBudgets.map((item) => {
       let id = -1;
       id++;
@@ -35,7 +39,7 @@ export async function POST(req: Request) {
         id,
         period: now.year,
         createdAt: item.createdAt,
-        todaysBudget: item.todaysBudget,
+        todaysBudget: item.income - item.outcome,
       };
     });
 

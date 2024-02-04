@@ -19,7 +19,7 @@ const Chart: React.FC<{ email: string }> = ({ email }) => {
     const value = element.value;
 
     const selectedChart = value;
-    selectedChart === "doughnut" ? setChart("doughnut") : setChart("line");
+    selectedChart === "bar" ? setChart("bar") : setChart("line");
   };
 
   return (
@@ -41,7 +41,7 @@ const Chart: React.FC<{ email: string }> = ({ email }) => {
             className="bg-background p-2 rounded-lg font-light outline-none"
           >
             <option value="line">Line</option>
-            <option value="doughnut">Doughnut</option>
+            <option value="bar">Bar</option>
           </select>
         </div>
         <ChartElement type={chart} period={selectedDate} email={email} />
