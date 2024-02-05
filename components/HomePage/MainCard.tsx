@@ -53,6 +53,9 @@ const MainCard = ({ user }: HomeMainCardProps) => {
       } else {
         setIsTodaysBudget(false);
       }
+      if (fetchedData !== null && fetchedData?.status === 202) {
+        setAllBudget(fetchedData.allBudget);
+      }
     });
     setIsLoading(false);
   }, []);

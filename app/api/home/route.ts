@@ -66,6 +66,8 @@ export async function POST(req: Request) {
         {
           message: "There is not today's budget",
           today: null,
+          allBudget: budget.budget,
+          status: 202,
         },
         {
           status: 202,
